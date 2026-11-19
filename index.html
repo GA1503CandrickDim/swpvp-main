@@ -1,0 +1,612 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SWPVP</title><link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&family=Syne:wght@800&display=swap" rel="stylesheet"><style>:root{--red:#ff1a1a;--green:#00ff88;--gold:#D4AF37;--purple:#a855ff;--blue:#0084ff;--bg:#050505;--text:#e8e8e8;--muted:#888}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:'Space Grotesk',sans-serif;overflow-x:hidden;position:relative}body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(600px at 15% 10%,rgba(255,26,26,.22),transparent 70%),radial-gradient(500px at 85% 20%,rgba(168,85,255,.22),transparent 70%),radial-gradient(600px at 30% 90%,rgba(0,255,136,.16),transparent 70%)}h1,h2{font-family:'Syne',sans-serif}h2{margin:0 0 16px;font-size:11px;letter-spacing:4px;color:var(--accent,var(--red))}.muted{font-size:11px;color:var(--muted)}.center{text-align:center}#matrix{position:fixed;inset:0;z-index:0;opacity:.22;pointer-events:none}header{position:sticky;top:0;z-index:20;padding:16px 20px;background:rgba(5,5,5,.9);backdrop-filter:blur(28px) saturate(1.6);border-bottom:1px solid #1a1a1a}header h1{margin:0 0 14px;font-size:20px;letter-spacing:8px;color:#fff;font-weight:800}header h1 b{color:var(--red);text-shadow:0 0 20px var(--red)}.head-row{display:flex;align-items:center;justify-content:space-between;margin:0 0 14px}.head-row h1{margin:0}.bright-btn{display:inline-flex;align-items:center;gap:6px;background:#1a1a1a;color:#fff;border:1px solid rgba(168,85,255,.55);border-radius:12px;padding:6px 10px;font-size:11px;font-weight:700;letter-spacing:1px;cursor:pointer;white-space:nowrap;box-shadow:0 0 12px rgba(168,85,255,.25)}.bright-btn:active{transform:scale(.93)}.bright-btn .bright-eye{font-size:16px;line-height:1}.bright-btn .bright-lvl{font-size:10px;color:var(--gold)}#bright-dim{position:fixed;inset:0;background:#000;opacity:0;pointer-events:none;z-index:9998}.nav{display:flex;gap:10px;flex-wrap:wrap;background:rgba(255,255,255,.03);border:1px solid #1e1e1e;border-radius:16px;padding:10px}.nav button{flex:1 1 auto;background:transparent;color:#a8a8a8;border:1px solid transparent;padding:10px 14px;font-size:11px;font-weight:700;letter-spacing:2px;border-radius:100px;cursor:pointer;white-space:nowrap;text-align:center}.nav button:hover{color:#fff;border-color:#3a3a3a;background:rgba(255,255,255,.06)}.nav button:focus-visible{outline:2px solid var(--gold);outline-offset:2px}.nav button.active{background:var(--red);color:#000;border-color:var(--red);font-weight:800;box-shadow:0 0 30px rgba(255,26,26,.6),inset 0 0 0 1px rgba(212,175,55,.85)}main{max-width:900px;margin:0 auto;padding:20px;position:relative}.page{display:none}.page.active{display:block;animation:popIn .4s}@keyframes popIn{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}.card{position:relative;overflow:hidden;background:linear-gradient(180deg,#121212,#0a0a0a);border:1px solid #1c1c1c;border-radius:20px;padding:24px;margin:18px 0}.card::after{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,#ff1a1a,#a855ff,#00ff88,#ffd700,#00d2ff,#fff)}.card.accent{border-color:var(--accent,var(--red))}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}@media(max-width:700px){.grid2{grid-template-columns:1fr}}.dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--accent,var(--red));box-shadow:0 0 10px var(--accent,var(--red))}.btn{display:block;background:#fff;color:#000;text-align:center;padding:12px;border-radius:100px;font-weight:800;text-decoration:none;margin:6px 0;font-size:12px}.btn-gold{background:var(--gold)}.btn-red{background:var(--red);color:#fff}.btn-green{background:var(--green);color:#000}.quote{border-left:3px solid var(--red);background:#0f0f0f;padding:14px;border-radius:0 12px 12px 0;font-style:italic;color:#ccc;margin:16px 0}.code{font-family:monospace;color:var(--green);letter-spacing:2px}51%,100%{opacity:0}}.qr-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px;}.qr{background:#0f0f0f;border:1px solid #222;border-radius:18px;padding:12px;text-align:center;}.qr p{font-size:10px;letter-spacing:2px;margin:6px 0;color:#ccc;}.qr img{width:100%;min-height:140px;border-radius:12px;background:#fff;}.qr .addr{font-size:7px;word-break:break-all;color:var(--muted);letter-spacing:0;}.vault{font-size:10px;letter-spacing:4px;color:var(--green);text-align:center;margin-bottom:12px;}hr{border:0;border-top:1px solid #1a1a1a;margin:24px 0;}.dm-bubble.you{background:var(--blue);color:#fff;margin-left:auto;align-self:flex-end;}.msg-tab.on{background:var(--blue);border-color:var(--blue)}.msg-prev.un{color:#fff;font-weight:700}.btn small{display:block;font-size:9px;font-weight:400;opacity:.65;margin-top:2px;}.blog-app{width:100%;background:#000;border:1px solid #3a3b3c;display:flex;flex-direction:column;border-radius:20px;overflow:hidden;position:relative;}.topbar{padding:12px 16px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #3a3b3c;font-weight:700;font-size:13px;}.topbar .add{cursor:pointer;font-size:20px;color:var(--green);}.feed-empty{padding:28px 20px;text-align:center;color:#b0b3b8;}.post{border-bottom:8px solid #242526;}.post-actions .edit{margin-left:auto;font-size:14px;}.feed-filter button.on{background:var(--blue);border-color:var(--blue)}.pm-chip.on{background:var(--blue);border-color:var(--blue)}.cmt{margin-top:6px;border-top:1px solid #222;padding:8px 16px 0}.modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.96);z-index:1000;flex-direction:column;overflow-y:auto;padding:180px 0 40px;box-sizing:border-box;}.modal.show{display:flex;}.modal-header{padding:16px;display:flex;justify-content:space-between;border-bottom:1px solid #3a3b3c;}.modal-header .close{cursor:pointer;padding:10px 14px;}.modal-body{flex:1;padding:16px;display:flex;flex-direction:column;gap:12px;}.modal-body input,.modal-body textarea{background:#3a3b3c;border:0;border-radius:10px;padding:12px;color:#e4e6eb;outline:none;}.modal-body button{background:var(--blue);border:0;border-radius:20px;padding:12px;color:#fff;font-weight:600;cursor:pointer;}.unit{background:#111;border:1px solid #222;border-radius:12px;padding:14px;}.unit.featured{border:2px solid var(--gold);}.unit.featured b{color:var(--gold);}.product .product .name{font-size:9px;letter-spacing:1px;line-height:12px;min-height:28px;color:#ccc;}.product .product .buy.msg{background:#1877f2;color:#fff;}@media(max-width:700px){}.home-hero{padding:72px 20px 60px;container-type:inline-size;}.home-hero .kicker{font-size:10px;letter-spacing:6px;color:var(--red);}.glitch{font-size:68px;margin:0;letter-spacing:14px;font-weight:800;line-height:.9;color:#fff;text-shadow:2px 0 var(--red),-2px 0 #fff;}@media (max-width:480px){.glitch{font-size:8vw;letter-spacing:.05em;}}.glitch{font-size:min(9cqi,8vw);letter-spacing:.05em;}.quote{font-size:11px;color:#00d2ff;max-width:400px;margin:18px auto 0;}.location{font-size:10px;letter-spacing:4px;color:var(--muted);margin:14px 0 0;}.ticker{border:1px solid #1a1a1a;border-radius:100px;padding:8px 0;margin:16px 0;overflow:hidden;white-space:nowrap;background:rgba(255,255,255,.02);}.ticker span{display:inline-block;font-size:10px;letter-spacing:4px;background:linear-gradient(90deg,#ff1a1a,#a855ff,#00ff88,#ffd700,#00d2ff,#fff,#ff1a1a);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:scroll 12s linear infinite;}@keyframes scroll{from{transform:translateX(0);}to{transform:translateX(-50%);}}@keyframes flicker{0%,100%{opacity:1;text-shadow:0 0 8px var(--green),0 0 20px var(--green);}5%{opacity:.3;}10%{opacity:1;}15%{opacity:.6;text-shadow:none;}20%{opacity:1;}50%{opacity:.9;}80%{opacity:1;text-shadow:0 0 8px var(--green);}}.enc-title{font-family:monospace;letter-spacing:3px;color:var(--green);animation:flicker 2s infinite;}#page-bloodnet{width:100vw;max-width:100vw;margin-left:calc(-50vw + 50%);box-sizing:border-box;padding-left:20px;padding-right:20px;padding-bottom:90px;min-height:calc(100vh - 100px);min-height:calc(100dvh - 100px)}:root{--sd-stars:radial-gradient(1px 1px at 12% 22%,#fff,transparent),radial-gradient(1px 1px at 34% 8%,#fff,transparent),radial-gradient(1px 1px at 56% 18%,#fff,transparent),radial-gradient(1px 1px at 78% 12%,#fff,transparent),radial-gradient(1px 1px at 22% 48%,#fff,transparent),radial-gradient(1px 1px at 68% 55%,#fff,transparent),radial-gradient(1px 1px at 88% 42%,#fff,transparent),radial-gradient(1px 1px at 44% 68%,#fff,transparent),radial-gradient(1px 1px at 8% 78%,#fff,transparent),radial-gradient(1px 1px at 92% 82%,#fff,transparent)}#page-bloodnet.bg-galaxies{background-color:#020208;background-image:var(--sd-stars),radial-gradient(700px at 18% 12%,rgba(168,85,255,.5),transparent 70%),radial-gradient(600px at 82% 30%,rgba(0,132,255,.45),transparent 70%),radial-gradient(800px at 50% 88%,rgba(212,175,55,.28),transparent 70%);background-size:340px 340px,auto,auto,auto}#page-bloodnet.bg-hellfire{background-color:#0a0202;background-image:var(--sd-stars),radial-gradient(700px at 20% 10%,rgba(255,26,26,.5),transparent 70%),radial-gradient(600px at 80% 35%,rgba(255,140,0,.42),transparent 70%),radial-gradient(800px at 50% 90%,rgba(255,60,0,.3),transparent 70%);background-size:340px 340px,auto,auto,auto}#page-bloodnet.bg-ocean{background-color:#010a12;background-image:var(--sd-stars),radial-gradient(700px at 18% 12%,rgba(0,132,255,.5),transparent 70%),radial-gradient(600px at 82% 30%,rgba(0,255,220,.35),transparent 70%),radial-gradient(800px at 50% 88%,rgba(0,80,180,.4),transparent 70%);background-size:340px 340px,auto,auto,auto}#page-bloodnet.bg-emerald{background-color:#02120a;background-image:var(--sd-stars),radial-gradient(700px at 18% 12%,rgba(0,255,136,.45),transparent 70%),radial-gradient(600px at 82% 30%,rgba(212,175,55,.32),transparent 70%),radial-gradient(800px at 50% 88%,rgba(0,160,90,.4),transparent 70%);background-size:340px 340px,auto,auto,auto}#page-bloodnet.bg-custom{background-color:var(--sd-custom,#a855ff);background-image:var(--sd-stars),radial-gradient(700px at 50% 0%,rgba(255,255,255,.14),transparent 70%);background-size:340px 340px,auto}#page-bloodnet[class*="bg-"] .blog-app{background:rgba(2,2,8,.78)}.sd-sw.on{border-color:#fff;box-shadow:0 0 12px rgba(255,255,255,.55)}html,body{overflow-x:clip}@media (max-width:640px){#bloodnet-bubble{bottom:8px;right:8px;padding:6px 8px;font-size:10px}.nav{gap:10px;padding:10px;flex-wrap:nowrap;overflow-x:auto}.nav button{padding:10px 4px;font-size:10px;letter-spacing:0;flex:1 1 auto}}@media(max-width:480px){header{padding:14px 16px}.head-row{gap:8px}header h1{font-size:14px;letter-spacing:2px}.bright-btn{padding:5px 8px;font-size:10px}}#sav-chat-fab{position:fixed;bottom:20px;left:20px;z-index:999;background:#121212;color:#fff;border:1px solid var(--red);border-radius:999px;padding:12px 16px;font-size:12px;font-weight:800;letter-spacing:1px;cursor:grab;touch-action:none;user-select:none;-webkit-user-select:none;box-shadow:0 4px 20px rgba(0,0,0,.5)}#sav-chat-fab.dragging{cursor:grabbing;box-shadow:0 8px 28px rgba(0,0,0,.65);filter:brightness(1.15)}#sav-chat{position:fixed;bottom:76px;left:20px;z-index:1001;width:320px;max-width:calc(100vw - 40px);height:380px;max-height:calc(100vh - 120px);background:#0d0d0d;border:1px solid #333;border-radius:16px;display:none;flex-direction:column;overflow:hidden;box-shadow:0 8px 30px rgba(0,0,0,.6)}#sav-chat.open{display:flex}#sav-chat-head{display:flex;justify-content:space-between;align-items:center;padding:12px 14px;border-bottom:1px solid #222;font-weight:800;letter-spacing:2px;font-size:12px;cursor:grab;touch-action:none;user-select:none;-webkit-user-select:none}#sav-chat.dragging{cursor:grabbing}#sav-chat-head button{background:none;border:0;color:#fff;font-size:14px;cursor:pointer;padding:4px 8px}#sav-chat-log{flex:1;overflow-y:auto;padding:12px;display:flex;flex-direction:column;gap:8px}.sav-msg{max-width:85%;padding:9px 12px;border-radius:14px;font-size:13px;line-height:1.45;word-wrap:break-word}.sav-msg.you{background:var(--blue);color:#fff;align-self:flex-end}.sav-msg.bot{background:#1c1c1c;color:#eee;align-self:flex-start}#sav-chat-form{display:flex;gap:8px;padding:10px;border-top:1px solid #222}#sav-chat-in{flex:1;min-width:0;background:#1a1a1a;border:1px solid #333;border-radius:20px;padding:10px 12px;color:#fff;font-size:13px}#sav-chat-form button{background:var(--red);border:0;border-radius:20px;padding:10px 16px;color:#fff;font-weight:800;cursor:pointer;font-size:12px}</style><style>@keyframes auraPulse{0%,100%{box-shadow:0 0 0 3px rgba(212,175,55,.9),0 0 34px rgba(212,175,55,.55)}50%{box-shadow:0 0 0 8px rgba(212,175,55,.5),0 0 66px rgba(212,175,55,.95)}}@keyframes splashIn{from{transform:scale(.82);opacity:0}to{transform:scale(1);opacity:1}}#loading-page{perspective:900px}#splash-flip{display:block;position:relative;z-index:1;transition:transform .3s ease-in-out}#loading-page #splash-flip>img{animation:splashIn .9s ease-out both,auraPulse 3.2s ease-in-out .9s infinite}@keyframes heroAura{0%,100%{box-shadow:0 0 44px -6px rgba(212,175,55,.55)}50%{box-shadow:0 0 72px -4px rgba(212,175,55,.9)}}.home-hero{animation:heroAura 3.6s ease-in-out infinite}.home-hero::before{content:'';position:absolute;inset:0;border-radius:inherit;background:linear-gradient(115deg,transparent 40%,rgba(212,175,55,.30) 50%,transparent 60%);background-size:280% 100%;background-position:120% 0;animation:heroShimmer 4.2s ease-in-out infinite;pointer-events:none}@keyframes heroShimmer{0%{background-position:120% 0}55%,100%{background-position:-120% 0}}.card,.qr{transition:box-shadow .35s ease,transform .18s ease}.card{box-shadow:0 0 30px -8px var(--accent,rgba(255,26,26,.55))}.card:active{box-shadow:0 0 46px -4px var(--accent,rgba(255,26,26,.9))}.qr{box-shadow:0 0 28px -8px rgba(212,175,55,.65)}.qr:active{transform:scale(.97);box-shadow:0 0 42px -4px rgba(212,175,55,.95)}@keyframes navGlow{0%,100%{box-shadow:0 0 30px rgba(255,26,26,.6),inset 0 0 0 1px rgba(212,175,55,.85)}50%{box-shadow:0 0 52px rgba(255,26,26,.95),inset 0 0 0 1px rgba(212,175,55,1)}}.nav button.active{animation:navGlow 3s ease-in-out infinite}@media(prefers-reduced-motion:reduce){.nav button.active{animation:none}}@keyframes dotPulse{0%,100%{opacity:1}50%{opacity:.4}}.dot,#bloodnet-bubble span:first-child{animation:dotPulse 2.6s ease-in-out infinite}@keyframes bubblePulse{0%,100%{box-shadow:0 4px 20px rgba(0,0,0,.5),0 0 22px -4px rgba(255,26,26,.45)}50%{box-shadow:0 4px 20px rgba(0,0,0,.5),0 0 38px -2px rgba(255,26,26,.75)}}#bloodnet-bubble{animation:bubblePulse 3.2s ease-in-out infinite}button,.btn,.hideout-btn{transition:transform .16s ease,box-shadow .3s ease,filter .25s ease}button:active,.btn:active,.hideout-btn:active{transform:scale(.95);filter:brightness(1.2)}.nav button:active{transform:scale(.93)}.frame{border:2px solid #e3b93c;border-radius:10px;overflow:hidden;background:#000}.frame-bar{display:flex;align-items:center;justify-content:space-between;background:#191407;border-bottom:1px solid #4a3d14;padding:6px 10px;font-size:11px;letter-spacing:.1em}.frame-bar .bar-actions{display:flex;gap:6px;align-items:center}.frame-close{font:inherit;background:#e0202c;color:#fff;border:0;border-radius:6px;width:26px;height:26px;font-size:14px;line-height:1;cursor:pointer}.frame-expand{font:inherit;background:#222;color:#e3b93c;border:1px solid #4a3d14;border-radius:6px;height:26px;padding:0 8px;font-size:10px;letter-spacing:.08em;cursor:pointer}.frame-body{position:relative;height:340px}.frame.c-frame .frame-body{height:340px;transition:height .25s ease}.frame.c-frame.expanded .frame-body{height:640px}#game-frame-wrap:fullscreen{display:flex;flex-direction:column}#game-frame-wrap:fullscreen .frame-body{flex:1 1 auto;height:auto !important;min-height:0}#game-frame-wrap:-webkit-full-screen{display:flex;flex-direction:column}#game-frame-wrap:-webkit-full-screen .frame-body{flex:1 1 auto;height:auto !important;min-height:0}.frame-body iframe{display:block;width:100%;height:100%}.frame.narrow .frame-body iframe{max-width:400px;margin-left:auto;margin-right:auto}.frame-empty{position:absolute;inset:0;display:none;place-items:center;text-align:center;color:#8f887a;font-size:12px;padding:20px;letter-spacing:.06em}.frame.closed .frame-body iframe{display:none}.frame.closed .frame-empty{display:grid}.frame-fail{position:absolute;inset:0;display:none;place-items:center;text-align:center;color:#8f887a;font-size:12px;padding:20px;letter-spacing:.04em;background:#0a0a0a}.frame-fail b{color:#e8e4da;display:block;margin-bottom:6px;font-size:13px}.frame.c-frame.failed .frame-body iframe{display:none}.frame.c-frame.failed .frame-fail{display:grid}.frame-fail button,.frame-empty button{font:inherit;margin-top:12px;background:#e3b93c;color:#111;border:0;border-radius:7px;padding:8px 12px;font-weight:700;cursor:pointer;font-size:11px;letter-spacing:.06em}.c-controls{display:flex;gap:6px;margin-top:8px}.c-btn{font:inherit;flex:1;font-size:11px;letter-spacing:.06em;cursor:pointer;background:#141414;color:#e8e4da;border:1px solid #3d3d3d;border-radius:8px;padding:9px 6px}.c-btn.gold{border-color:#e3b93c;color:#e3b93c;background:#1d1807}.c-btn:active{transform:scale(.97)}.frame-note{font-size:11px;color:#8f887a;margin-top:10px;letter-spacing:.03em}.frame-note b{color:#e8e4da}.frame-howto{font-size:11px;color:#8f887a;margin-top:8px;letter-spacing:.03em;line-height:1.7}.frame-howto b{color:#e8e4da}.exit-guard{position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.72);padding:20px}.exit-guard[hidden]{display:none}.exit-guard-box{background:#14091f;border:1px solid #a86bff;border-radius:14px;max-width:320px;width:100%;padding:20px 18px;text-align:center;box-shadow:0 0 24px rgba(168,107,255,.45)}.exit-guard-box h3{margin:0 0 6px;font-size:15px;letter-spacing:.08em;color:#fff}.exit-guard-box p{margin:0 0 16px;font-size:12px;color:#b5b5b5;line-height:1.5}.exit-guard-box .eg-row{display:flex;gap:10px}.exit-guard-box button{flex:1;font:inherit;font-size:12px;font-weight:700;letter-spacing:.08em;padding:11px 6px;border-radius:8px;cursor:pointer}#exit-guard-stay{background:#a86bff;color:#fff;border:1px solid #a86bff}#exit-guard-exit{background:#111;color:#ff5b5b;border:1px solid #e0202c}#game-picker button.on{border-color:#0f0 !important;box-shadow:0 0 12px rgba(0,255,0,.35)}#game-title{color:#e8e4da;font-weight:700}.ms-profile{display:flex;align-items:center;gap:10px;background:linear-gradient(180deg,#171717,#0e0e0e);border:1px solid rgba(168,107,255,.45);border-radius:16px;padding:10px 12px;margin:0 0 12px}.ms-pav{width:44px;height:44px;border-radius:50%;border:2px solid #a86bff;display:flex;align-items:center;justify-content:center;font-size:22px;background:#141414;box-shadow:0 0 12px rgba(168,107,255,.5);flex:0 0 auto}.ms-pinfo b{display:block;font-size:15px;letter-spacing:2px}.ms-pinfo span{font-size:11px;color:#b5b5b5}.ms-pinfo .core{color:#37d67a;font-style:normal}.ms-lvl{margin-left:auto;text-align:right;flex:0 0 128px}.ms-bar{display:block;height:8px;border-radius:4px;background:#222;overflow:hidden;margin-bottom:5px}.ms-bar i{display:block;height:100%;background:linear-gradient(90deg,#a86bff,#ff4040)}.ms-lvltxt{font-size:10px;letter-spacing:1px;color:#c9a6ff;font-weight:700;white-space:nowrap}.ms-title{cursor:pointer}.ms-edit{background:none;border:0;color:#8f887a;font-size:10px;line-height:1;cursor:pointer;padding:0 2px;opacity:.55;vertical-align:1px}.ms-edit:hover{opacity:1;color:#c9a6ff}.ms-title-ed{display:none;align-items:center;gap:4px}.ms-title-ed input{font:inherit;font-size:11px;color:#e8e4da;background:#141414;border:1px solid #a86bff;border-radius:6px;padding:3px 6px;width:104px;outline:none}.ms-title-ed button{font:inherit;font-size:11px;cursor:pointer;background:#141414;color:#e8e4da;border:1px solid #3d3d3d;border-radius:6px;padding:3px 7px}.ms-title-ed button:hover{border-color:#a86bff}@media (max-width:640px){.ms-lvl{flex-basis:96px}.ms-pinfo span{font-size:10px}}</style><link rel="manifest" href="/manifest.json"><meta name="theme-color" content="#000000"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><meta name="apple-mobile-web-app-title" content="SAVAGE WRAITH"><link rel="icon" href="/icon-192.png"><link rel="apple-touch-icon" href="/icon-192.png"></head><body><div id="loading-page" style="position:fixed;inset:0;background:#000;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;padding:20px;cursor:pointer;overflow-y:auto"><canvas id="matrix-loading" style="position:absolute;inset:0;width:100%;height:100%;opacity:.35;pointer-events:none"></canvas><span id="splash-flip"><img id="splash-img" src="data:image/jpeg;base64,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" data-kid="data:image/jpeg;base64,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" alt="Cee" style="width:280px;height:280px;object-fit:cover;border-radius:50%;border:3px solid #888;position:relative;z-index:1;cursor:pointer"></span><a href="https://open.spotify.com/user/f5fw0fr8k6qnmw0fgyt93ghqk" target="_blank" rel="noopener" onclick="event.stopPropagation()" style="position:relative;z-index:1"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAXcAAABcAQAAAAC9p8gSAAACOklEQVR42u2XPW6cQBTHfwNI3mIVRkpryXOEHCCykU/iMmVukCn2ADnCniRClgsfA0uR4i5slIK1gJeCr2X4WCgSpdhX7Irhpzf/eV+AEtaYeKyzC3/h/z2vNs7yBkDMBH/kaPvLOUCZTvDPsO+3xbyeGF7HbxfRoMNESsCXUyt9EZE8lCyU/g0PKIFiRXxyAHuO3P9q+Nf6DPOT4dPPhk9ofmYtsTUfA6Qr6yHr1gLgxfLSLhyiHm/bjPb3n/A/mUw7p6es8ml2DvB0jHbAwbZ8eVIyeX3V2bcqLmnnP8efC0420OPnYTJUqyfjuYWb5rrdSbIpPluW3n58rs8WUJ/3l/tPM6Vs414v8H+EHcY577yewuqEwjwCx6hNJo/9+aI7/V8BUqnzE7tzIm9KxgO4K/mdztWl9PMbq7R4mFOtXP3vFoYfr+onNY/LYJ58YLmeQimzXeEf+O6z6rwFgKcVsDEQuVzQsE2+DAaV3KK5igmb/N72mkylNX9T8mN5fWqVqORtXb9cD/pxjj8Evq3PuKD+N6KL6GHdfHvW9d1Wj9pM8QHwNpw66WmruP7l8/L4eAD7KpWBuXeA+8DsAG1PEt1t5A/q+iMxBwilxdTa+W97G1XXGsx4aYvEAOGZ53t5FX+pn+9mSWLrfb0GNWdx08jeQNciky2Wtfrz+n/p+4k3Pc8DPRJPZWE7J9qJpyRwN67HtVIJUATuQz7IgeJ9Ov6948ehq7uaLyNhunxPXfgL/9/wf9v+AFksLW+FPw6MAAAAAElFTkSuQmCC" alt="Spotify" style="width:320px;max-width:90vw;height:auto;display:block"></a><div class="card accent" style="--accent:var(--blue);padding:0;width:92%;max-width:640px;font-size:18px;border:4px solid var(--blue);box-shadow:0 0 0 6px rgba(0,210,255,.2),0 0 50px rgba(0,210,255,.7);position:relative;z-index:1"><div class="blog-app"><div class="topbar"><span class="enc-title" id="enc-title-loading">1010101010010101 // DECRYPTING_</span></div><div style="padding:16px"><div class="feed-empty" id="binary-status-loading">Getting database...</div><h2 style="color:var(--green)">NOW PLAYING</h2><p id="splash-now-song"><b>Broken Garden</b> — Lo Key, BatiBatt</p><p class="muted" id="splash-now-time">⏸ Paused at 1:52 / 3:32</p></div></div></div></div>
+<script>(function(){var cv=document.getElementById('matrix-loading');if(!cv)return;var ctx=cv.getContext('2d');cv.width=innerWidth;cv.height=innerHeight;var drops=[];for(var i=0;i<cv.width/14;i++)drops[i]=Math.random()*-100;addEventListener('resize',function(){cv.width=innerWidth;cv.height=innerHeight;drops=[];for(var j=0;j<cv.width/14;j++)drops[j]=Math.random()*-100;});(function draw(){ctx.fillStyle='rgba(0,0,0,0.08)';ctx.fillRect(0,0,cv.width,cv.height);ctx.fillStyle='#00ff88';ctx.font='14px monospace';for(var k=0;k<drops.length;k++){ctx.fillText('VANIX01'[Math.floor(Math.random()*7)],k*14,drops[k]*14);if(drops[k]*14>cv.height&&Math.random()>0.975)drops[k]=0;drops[k]++;}requestAnimationFrame(draw);})();})();</script>
+<script>(function(){var o=document.getElementById('loading-page');if(!o)return;var t=document.getElementById('enc-title-loading');var el=document.getElementById('binary-status-loading');var msgs=['Getting database...','Connecting...','Decrypting...'];var codes=['1010101010010101','1100110011001010','1010010101011100','1110001010101010','0101010101010101'];var i=0;var iv=setInterval(function(){i=(i+1)%msgs.length;if(el)el.textContent=msgs[i];if(t)t.textContent=codes[i%codes.length]+' // ';},900);var hidden=false;function hide(){if(hidden)return;hidden=true;clearInterval(iv);o.style.transition='opacity .6s';setTimeout(function(){o.style.opacity='0';},20);setTimeout(function(){o.style.display='none';},700);}o.addEventListener('click',hide);window.__splashHide=hide;setTimeout(hide,10000);})();</script>
+<script>(function(){var img=document.getElementById('splash-img');var wrap=document.getElementById('splash-flip');if(!img||!wrap)return;var kid=img.getAttribute('data-kid');var me=img.getAttribute('src');var flipped=false,flipping=false,autoT=null;function flip(){if(flipping)return;flipping=true;wrap.style.transform='rotateY(90deg)';setTimeout(function(){flipped=!flipped;img.src=flipped?kid:me;wrap.style.transform='rotateY(0deg)';setTimeout(function(){flipping=false;},300);},300);}autoT=setTimeout(flip,1400);img.addEventListener('click',function(e){e.stopPropagation();if(autoT){clearTimeout(autoT);autoT=null;}flip();});})();</script>
+<script>(function(){var done=false;function toWasListening(){if(done)return;done=true;document.querySelectorAll('h2,span').forEach(function(el){if(el.textContent.indexOf('NOW PLAYING')>=0)el.textContent=el.textContent.replace('NOW PLAYING','WAS LISTENING');});}var lp=document.getElementById('loading-page');if(lp)lp.addEventListener('click',toWasListening);setTimeout(toWasListening,2800);})();</script>
+<canvas id="matrix"></canvas><header><div class="head-row"><h1><b id="logo-name">VANIX</b></h1><button type="button" id="bright-btn" class="bright-btn" data-level="HIGH" onclick="cycleBrightness()" title="Brightness — tap to change" aria-label="Brightness"><span class="bright-eye">👁</span><span class="bright-lvl">HIGH</span></button></div><div class="ms-profile" aria-label="VANIX profile"><span class="ms-pav">💀</span><span class="ms-pinfo"><b>VANIX</b><span id="ms-title-line"><span id="ms-title" class="ms-title" title="Tap to edit title">House fighter</span> · <i class="core">● core lit</i><button type="button" id="ms-title-edit" class="ms-edit" title="Edit title" aria-label="Edit title">✎</button></span><span id="ms-title-ed" class="ms-title-ed"><input id="ms-title-input" type="text" maxlength="40" aria-label="Profile title"><button type="button" id="ms-title-save" aria-label="Save title">✓</button><button type="button" id="ms-title-cancel" aria-label="Cancel edit">✕</button></span></span><span class="ms-lvl"><span class="ms-bar"><i style="width:68%"></i></span><span class="ms-lvltxt">LEVEL 22 · 68% TO 23</span></span></div><script>(function(){var KEY='vanix_title',DEF='House fighter';var t=document.getElementById('ms-title');if(!t)return;var line=document.getElementById('ms-title-line'),ed=document.getElementById('ms-title-ed'),inp=document.getElementById('ms-title-input'),eb=document.getElementById('ms-title-edit'),sv=document.getElementById('ms-title-save'),cx=document.getElementById('ms-title-cancel');try{var v=localStorage.getItem(KEY);if(v)t.textContent=v;}catch(e){}function open(){if(!ed||!inp)return;inp.value=t.textContent;if(line)line.style.display='none';ed.style.display='inline-flex';inp.focus();inp.select();}function close(){if(line)line.style.display='';if(ed)ed.style.display='none';}function save(){if(!inp)return;var v=inp.value.trim();if(v){t.textContent=v;try{localStorage.setItem(KEY,v);}catch(e){}}close();}if(eb)eb.addEventListener('click',function(e){e.stopPropagation();open();});t.addEventListener('click',open);if(sv)sv.addEventListener('click',save);if(cx)cx.addEventListener('click',close);if(inp)inp.addEventListener('keydown',function(e){if(e.key==='Enter')save();else if(e.key==='Escape')close();});})();</script><div class="nav"><button class="active" id="b-home" onclick="show('home')">HOME</button><button id="b-bloodnet" onclick="show('bloodnet')">BLOODNET</button><button id="b-vault" onclick="show('vault')">THE VAULT</button></div></header><main><div id="page-home" class="page active"><div class="card center home-hero accent" style="--accent:var(--blue);cursor:pointer" onclick="show('hesoyam')"><p class="kicker"><span class="dot"></span><span id="hero-name">CEEJAY</span></p><h1 class="glitch">ONEBLOOD</h1><div class="ticker"><span style="animation:none;background:none;-webkit-text-fill-color:#fff;color:#fff"> // SEARCH // </span></div><div class="ticker" style="margin-top:8px"><span> // WE ARE ANONYMOUS. WE ARE LEGION. // WE do not forgive .... // WE ARE ANONYMOUS. WE ARE LEGION. // WE do not forgive .... // </span></div><p class="quote" id="hero-quote">“It ain’t about how hard you hit — it’s about how hard you can get hit and keep moving forward.”</p><p class="location" style="color:var(--red)" id="hero-talk">“Why so serious?”</p>
+<script>(function(){var el=document.getElementById('hero-quote');if(!el)return;var quotes=["“It ain’t about how hard you hit — it’s about how hard you can get hit and keep moving forward.”","“With great power comes great responsibility.”","“Float like a butterfly, sting like a bee.”","“Fall seven times, stand up eight.”","“The greatest glory in living lies not in never falling, but in rising every time we fall.”","“It always seems impossible until it’s done.”","“The harder the battle, the sweeter the victory.”"];var i=0;el.style.transition='opacity .6s';setInterval(function(){el.style.opacity='0';setTimeout(function(){i=(i+1)%quotes.length;el.textContent=quotes[i];el.style.opacity='1';},600);},5000);})();</script>
+<script>(function(){var el=document.getElementById('hero-talk');if(!el)return;var quotes=["“Why so serious?”","“I am inevitable.”","“You think darkness is your ally? I was born in it, molded by it.”","“You either die a hero, or you live long enough to see yourself become the villain.”","“I am the one who knocks.”"];var i=0;el.style.transition='opacity .6s';setInterval(function(){el.style.opacity='0';setTimeout(function(){i=(i+1)%quotes.length;el.textContent=quotes[i];el.style.opacity='1';},600);},5000);})();</script>
+<script>(function(){var el=document.getElementById('logo-name');if(!el)return;var names=["VANIX","SAVAGEWRAITH","CEEJAY"];var i=0;el.style.transition='opacity .6s';setInterval(function(){el.style.opacity='0';setTimeout(function(){i=(i+1)%names.length;el.textContent=names[i];el.style.opacity='1';},600);},5000);})();</script>
+<script>(function(){var el=document.getElementById('hero-name');if(!el)return;var names=["CEEJAY","SAVAGEWRAITH","VANIX"];var i=0;el.style.transition='opacity .6s';setInterval(function(){el.style.opacity='0';setTimeout(function(){i=(i+1)%names.length;el.textContent=names[i];el.style.opacity='1';},600);},5000);})();</script>
+ </div>
+
+<script>(function(){window.fmtAtoms=function(n){var v=Number(n);if(isNaN(v))v=0;return String(Math.floor(v));};function molBal(){try{var v=parseInt(localStorage.getItem('sw_sav_molecules'),10);if(isNaN(v)||v<0)v=25;return v;}catch(e){return 25;}}function updateMolCount(){var el=document.getElementById('mol-count');if(!el)return;var ion=window.__ionPacks||{};if(ion.uid&&typeof ion.bal==='number'){el.textContent=fmtAtoms(ion.bal);return;}el.textContent=fmtAtoms(molBal());}window.updateMolCount=updateMolCount;document.addEventListener('DOMContentLoaded',updateMolCount);window.addEventListener('storage',function(e){if(!e||e.key==='sw_sav_molecules')updateMolCount();});var hb=document.getElementById('b-home');if(hb)hb.addEventListener('click',function(){setTimeout(updateMolCount,50);});setInterval(updateMolCount,1000);updateMolCount();})();</script>
+<div class="card" id="game-picker"><h2>PICK A GAME</h2><div style="display:flex;gap:10px;flex-wrap:wrap"><button type="button" id="pick-invader" data-game="invader" onclick="pickGame('invader')" style="flex:1;padding:12px;background:#111;color:#fff;border:1px solid #0f0;border-radius:10px;font-weight:700;letter-spacing:1px;cursor:pointer">★ STAR INVADER</button><button type="button" id="pick-tetris" data-game="tetris" onclick="pickGame('tetris')" style="flex:1;padding:12px;background:#111;color:#fff;border:1px solid #f0f;border-radius:10px;font-weight:700;letter-spacing:1px;cursor:pointer">◢ TETRIS</button><button type="button" id="pick-bounce" data-game="slime" onclick="pickGame('slime')" style="flex:1;padding:12px;background:#111;color:#fff;border:1px solid #ff4040;border-radius:10px;font-weight:700;letter-spacing:1px;cursor:pointer">● SLIMEBALL</button><button type="button" id="pick-run" data-game="sav" onclick="pickGame('sav')" style="flex:1;padding:12px;background:#111;color:#fff;border:1px solid #ffcc33;border-radius:10px;font-weight:700;letter-spacing:1px;cursor:pointer">▶ SAV</button></div></div><div class="frame c-frame" id="game-frame-wrap"><div class="frame-bar"><span id="game-title">DON'T PAUSE? // STAR INVADER</span><span class="bar-actions"><button class="frame-expand" id="game-expand" type="button" aria-label="Expand frame">⛶ EXPAND</button><button class="frame-close" id="game-close" type="button" aria-label="Close game">✕</button></span></div><div class="frame-body" id="game-frame-body"><iframe id="game-frame" title="game" src="about:blank" frameborder="0" scrolling="no" allowfullscreen="" allow="fullscreen" style="display:block;width:100%;height:100%;border:0;background:#000"></iframe><div class="frame-empty">FRAME IS EMPTY<br><button id="game-reopen" type="button">↻ REOPEN GAME</button></div><div class="frame-fail"><div><b>Couldn't load from the arcade</b>The tab still works — nothing is stuck in a dead box.<br><button id="game-retry" type="button">↻ TRY AGAIN</button></div></div></div></div><div class="exit-guard" id="exit-guard" hidden><div class="exit-guard-box" role="dialog" aria-label="Exit game?"><h3>EXIT?</h3><p>Your progress is saved.</p><div class="eg-row"><button id="exit-guard-exit" type="button">EXIT</button><button id="exit-guard-stay" type="button">STAY</button></div></div></div><div class="c-controls"><button class="c-btn gold" id="game-openfull" type="button">↗ FULLSCREEN</button></div><p class="frame-note">The frame <b>grows to fit the game</b> — Tetris gets the full height, no scrolling inside a box. Close (✕) never disappears, and <b>↗ FULLSCREEN</b> takes you to the full-screen arcade stage.</p><p class="frame-howto" id="game-howto" style="display:none"></p><div class="card accent" id="fun-now-bar" style="--accent:var(--green);margin-bottom:16px;display:block;color:inherit;cursor:pointer"><h2>NOW PLAYING</h2><p id="fun-now-song"><b>Broken Garden</b> — Lo Key, BatiBatt</p><p class="muted" id="fun-now-time">⏸ Paused at 1:52 / 3:32</p></div>
+
+
+
+
+
+
+
+
+<script>var ARCADE='https://wraith-domain.vercel.app/';
+var GAME_URLS={invader:ARCADE+'star-invader.html',tetris:ARCADE+'tetris.html',slime:ARCADE+'slimeball.html',sav:ARCADE+'sav.html',fight:ARCADE+'?mode=fight',hub:ARCADE};
+var GAME_TITLES={invader:"DON'T PAUSE? // STAR INVADER",tetris:'TETRIS',slime:'SLIMEBALL',sav:'SAV // PLATFORMER',fight:'VANIX FIGHT // STREET TAG',hub:'SWPVP // ARCADE DASHBOARD'};
+var GAME_HOWTO={invader:'<b>ARROWS / A D TO MOVE</b><br>SPACE TO SHOOT — ONE SHOT AT A TIME<br>ALIENS SPEED UP AS THEY FALL<br>SHOOT THE GOLD CAPSULE FOR FLASH SHOT',sav:'<b>ARROWS / A D TO RUN — SPACE / UP TO JUMP</b><br>STOMP BADDIES • GRAB MOLECULES • HIT ? BLOCKS<br>GOLD MASK • PET • STAR • 1UP IN BLOCKS<br>PET: JUMP ON TO RIDE • FIRE GULPS/SPITS • HOLD JUMP TO FLOAT<br>▼ NEAR A PIPE TO GO DOWN • REACH THE FLAG'};
+function syncHowto(){var el=document.getElementById('game-howto');if(!el)return;var h=GAME_HOWTO[_frameGame]||'';el.innerHTML=h;el.style.display=h?'':'none';}
+var GAME_H={invader:720,tetris:780,slime:560,sav:520,fight:900,hub:900};
+var _picked='invader',_frameGame=null,_fit=true,_gameH={},_gameReady={},_failTimer=null;
+function _frameWrap(){return document.getElementById('game-frame-wrap');}
+function _frameBody(){return document.getElementById('game-frame-body');}
+function _frameEl(){return document.getElementById('game-frame');}
+function syncExpand(){var b=document.getElementById('game-expand');if(b)b.textContent=_fit?'⛶ SHRINK':'⛶ EXPAND';var w=_frameWrap();if(w)w.classList.toggle('expanded',_fit);}
+function setFrameHeight(){var body=_frameBody();if(!body)return;var h=_fit?(_gameH[_frameGame]||GAME_H[_frameGame]||500):340;var w=_frameWrap();var nar=_frameGame==='invader'||_frameGame==='sav';if(w)w.classList.toggle('narrow',nar);if(_fit&&nar){var vh=window.innerHeight||800;var maxH=Math.max(320,vh-160);if(h>maxH)h=maxH;}body.style.height=h+'px';}
+function clearFailTimer(){if(_failTimer){clearTimeout(_failTimer);_failTimer=null;}}
+function armFailTimer(){clearFailTimer();if(_gameReady[_frameGame])return;_failTimer=setTimeout(function(){var w=_frameWrap();if(w&&_frameGame)w.classList.add('failed');},10000);}
+function showFrameGame(u){var f=_frameEl(),w=_frameWrap();if(!f||!w)return;w.classList.remove('closed');w.classList.remove('failed');f.style.display='';f.setAttribute('scrolling',_frameGame==='hub'?'yes':'no');if(f.getAttribute('src')!==u)f.setAttribute('src',u);setFrameHeight();armFailTimer();}
+function pickGame(which){_picked=which;_frameGame=which;_fit=true;_gameReady[which]=false;syncExpand();var t=document.getElementById('game-title');if(t)t.textContent=GAME_TITLES[which]||which;var btns=document.querySelectorAll('#game-picker button[data-game]');for(var i=0;i<btns.length;i++){btns[i].classList.toggle('on',btns[i].getAttribute('data-game')===which);}showFrameGame(GAME_URLS[which]);syncHowto();armExitGuard();}
+function closeFrame(){var w=_frameWrap();if(!w)return;w.classList.add('closed');w.classList.remove('failed');clearFailTimer();}
+var _guardArmed=false;
+function _frameActive(){var w=_frameWrap();return !!_frameGame&&w&&!w.classList.contains('closed');}
+function _guardEl(){return document.getElementById('exit-guard');}
+function showExitGuard(){var g=_guardEl();if(g)g.hidden=false;}
+function hideExitGuard(){var g=_guardEl();if(g)g.hidden=true;}
+function armExitGuard(){if(_guardArmed||!_frameActive())return;try{history.pushState({swExitGuard:1},'');_guardArmed=true;}catch(e){}}
+function disarmExitGuard(){if(!_guardArmed)return;_guardArmed=false;try{history.back();}catch(e){}}
+function confirmExitFrame(){hideExitGuard();closeFrame();disarmExitGuard();}
+function requestCloseFrame(){if(_frameActive()){showExitGuard();}else{closeFrame();}}
+function reopenFrame(){var w=_frameWrap();if(!w)return;w.classList.remove('closed');if(_frameGame){setFrameHeight();armFailTimer();armExitGuard();}}
+function retryFrame(){var w=_frameWrap();if(!w||!_frameGame)return;w.classList.remove('failed');_gameReady[_frameGame]=false;var f=_frameEl();if(f){var u=GAME_URLS[_frameGame];f.setAttribute('src','about:blank');f.setAttribute('src',u);}setFrameHeight();armFailTimer();}
+function toggleExpand(){_fit=!_fit;syncExpand();var f=_frameEl();if(f)f.setAttribute('scrolling',(_frameGame==='hub'||!_fit)?'yes':'no');setFrameHeight();}
+window.addEventListener('message',function(e){if(e.origin!==ARCADE.replace(/\/$/,''))return;var d=e.data;if(!d||d.type!=='vanix-game-ready')return;if(d.game!==_frameGame)return;_gameReady[d.game]=true;clearFailTimer();var w=_frameWrap();if(w)w.classList.remove('failed');if(typeof d.h==='number'&&d.h>0){_gameH[d.game]=d.h;setFrameHeight();}});
+function openFull(){var w=_frameWrap();if(!w)return;if(document.fullscreenElement){if(document.exitFullscreen)document.exitFullscreen();return;}if(w.requestFullscreen)w.requestFullscreen();else if(w.webkitRequestFullscreen)w.webkitRequestFullscreen();else if(w.msRequestFullscreen)w.msRequestFullscreen();}
+(function(){var ex=document.getElementById('game-expand');if(ex)ex.addEventListener('click',toggleExpand);var cl=document.getElementById('game-close');if(cl)cl.addEventListener('click',requestCloseFrame);var ro=document.getElementById('game-reopen');if(ro)ro.addEventListener('click',reopenFrame);var rt=document.getElementById('game-retry');if(rt)rt.addEventListener('click',retryFrame);var of=document.getElementById('game-openfull');if(of)of.addEventListener('click',openFull);var egx=document.getElementById('exit-guard-exit');if(egx)egx.addEventListener('click',confirmExitFrame);var egs=document.getElementById('exit-guard-stay');if(egs)egs.addEventListener('click',hideExitGuard);var eg=document.getElementById('exit-guard');if(eg)eg.addEventListener('click',function(e){if(e.target===eg)hideExitGuard();});document.addEventListener('keydown',function(e){if(e&&e.key==='Escape')hideExitGuard();});window.addEventListener('popstate',function(){if(!_frameActive())return;_guardArmed=false;showExitGuard();armExitGuard();});var f=_frameEl();if(f)f.addEventListener('load',function(){if(_frameGame){_gameReady[_frameGame]=true;clearFailTimer();var w=_frameWrap();if(w)w.classList.remove('failed');}});})();
+(function(){var bar=document.getElementById('fun-now-bar');if(!bar)return;bar.addEventListener('click',function(){pickGame('hub');});})();
+</script>
+</div><div id="page-hesoyam" class="page"><div id="ion-counter" style="display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border:1px solid rgba(255,215,0,.35);border-radius:999px;color:#ffd700;font-size:11px;font-weight:700;letter-spacing:2px;cursor:pointer;user-select:none;-webkit-user-select:none;touch-action:manipulation;opacity:.85">ION<span id="ion-count" style="display:none"></span></div><script>(function(){var pill=document.getElementById('ion-counter');if(!pill)return;var ION_URL='https://wraith-ecosystem-control.vercel.app';var navDone=false;function goIon(){if(navDone)return;navDone=true;window.location.href=ION_URL;}var lastTap=0;function tap(){var now=Date.now();if(now-lastTap<300){goIon();}lastTap=now;}pill.addEventListener('dblclick',function(e){e.preventDefault();goIon();});pill.addEventListener('click',tap);function fmt(n){if(typeof fmtAtoms==='function')return fmtAtoms(n);var v=Number(n);if(isNaN(v))v=0;return String(Math.floor(v));}function render(){var ion=window.__ionPacks||{};var c=document.getElementById('ion-count');if(!c)return;if(ion.uid&&typeof ion.bal==='number'){c.textContent=' · '+fmt(ion.bal);c.style.display='';}else{c.textContent='';c.style.display='none';}}if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',render);}else{render();}window.addEventListener('load',render);})();</script><div class="card accent"><h2>QR CODES // SCAN</h2><p class="vault">ENCRYPTED VAULT // SCAN TO ENCRYPT</p><div class="qr-grid" id="qr-grid"></div><p class="muted center" style="margin-top:16px">SCAN WITH ANY CAMERA OR WALLET APP. ALWAYS CHECK THE NAME MATCHES BEFORE YOU SEND.</p></div><div class="card accent" id="hesoyam-balance-card" style="--accent:var(--gold);margin-bottom:16px"><h2 style="color:var(--gold)">BALANCE</h2><div style="display:grid;gap:8px;margin-top:12px"><div style="display:flex;justify-content:space-between"><span>SoFi</span><b>$6.10</b></div></div><p style="margin:12px 0 0;border-top:1px solid #222;padding-top:8px;display:flex;justify-content:space-between"><span>Total</span><b>$1.99</b></p><p class="muted" style="margin:8px 0 0">Balance set manually — Nov 5.</p></div><div id="aq1"></div><div class="card accent"><h2>HESOYAM</h2><div class="grid2" style="margin-top:12px"><a class="btn btn-red" href="https://www.chime.com/r/candrickdim1/?c=s" target="_blank">CHIME</a><a class="btn" href="https://cash.app/$CeeWraith" target="_blank">CASH APP $CeeWraith</a><a class="btn" href="https://venmo.com/code?user_id=4348999209322036286" target="_blank">VENMO</a><a class="btn" href="https://paypal.me/CandrickJamesBorja" target="_blank">PAYPAL</a><a class="btn" href="https://www.sofi.com/invite/money?gcp=73aa8503-6a19-47c8-a9c6-157785958661&isAliasGcp=false&siid=ac48773e-fb57-4e59-b9a2-35341584a285" target="_blank">SOFI $450</a></div></div><div class="card accent" style="--accent:var(--blue)"><div class="center"><a class="btn" style="background:#25D366;color:#fff" href="https://wa.me/15854482416" target="_blank" rel="noopener">💬 WhatsApp</a></div></div></div><div id="page-vault" class="page"><div class="card accent" id="hideout-now-card" style="--accent:var(--green);margin-bottom:16px;cursor:pointer" onclick="vsLoad()"><h2>NOW PLAYING</h2><p id="hideout-now-song"><b>Broken Garden</b> — Lo Key, BatiBatt</p><p class="muted" id="hideout-now-time">⏸ Paused at 1:52 / 3:32</p></div><div class="card accent" id="atom-wallet-card" style="--accent:#ffd700;margin-bottom:16px"><h2>ATOM WALLET</h2><p class="muted">Link your atom wallet from the Tavern so this site can see your atoms and spend them on the playlist packs.</p><div style="display:flex;gap:8px"><input id="atom-wallet-code" type="text" placeholder="Paste your ATOM1- code from the Tavern" autocomplete="off" autocapitalize="off" spellcheck="false" style="flex:1;min-width:0;background:#111;border:1px solid #333;border-radius:10px;color:#fff;padding:10px 12px;font-size:13px"><button class="btn btn-gold" id="atom-wallet-link" style="cursor:pointer;white-space:nowrap" onclick="linkAtomWallet()">LINK</button><button class="btn" id="atom-wallet-unlink" style="cursor:pointer;white-space:nowrap" onclick="unlinkAtomWallet()">UNLINK</button></div><p class="muted" id="atom-wallet-status" style="margin:8px 0 0">Not linked — get your code from the Tavern (arcadio), the ATOM WALLET card there.</p><p class="muted" id="atom-wallet-balance" style="margin:4px 0 0"></p></div><div class="card accent" id="hideout-playlists-card" style="--accent:var(--green);margin-bottom:16px"><button class="hideout-btn" id="hey-heading" style="--accent:var(--green);border-color:var(--green)" onclick="toggleHey()"><span><span style="color:var(--green)">●</span> hey</span><small id="hey-state">[ CLICK TO UNLOCK ]</small></button><div id="hey-body"><p class="muted">Shawty's Spotify playlists — one pack, all fourteen. Unlock with atoms.</p><div id="zxc-pack-locked"><p style="margin:0 0 8px"><a href="https://open.spotify.com/playlist/46xAcFtUVU8vyorxOTjzaP" target="_blank" rel="noopener" style="color:#fff"><b>zxc 1</b></a><br><a href="https://open.spotify.com/playlist/5jaWPmE82CT2CVKlfhJcrI" target="_blank" rel="noopener" style="color:#fff"><b>zxc 2</b></a><br><a href="https://open.spotify.com/playlist/1AFAnIvk6nJ8kkDgLAvbHv" target="_blank" rel="noopener" style="color:#fff"><b>zxc 3</b></a><br><a href="https://open.spotify.com/playlist/0jDomWPDrMOQly9wSbzJjC" target="_blank" rel="noopener" style="color:#fff"><b>ONEBLOOD</b></a><br><a href="https://open.spotify.com/playlist/3JutZoHAWjnmbeZJoijO6m" target="_blank" rel="noopener" style="color:#fff"><b>Stans</b></a><br><a href="https://open.spotify.com/playlist/1BV53rd1YZVkuh6AnKzfPF" target="_blank" rel="noopener" style="color:#fff"><b>._.</b></a><br><a href="https://open.spotify.com/playlist/3U6rFQEgNvtIzwLMxsHwfL" target="_blank" rel="noopener" style="color:#fff"><b>.;';</b></a><br><a href="https://open.spotify.com/playlist/4xJGAz1nBXjjma44GOiN6y" target="_blank" rel="noopener" style="color:#fff"><b>☝️☺️🤦‍♂️</b></a><br><a href="https://open.spotify.com/playlist/792R6upjvvzxJ7H7rYjqhj" target="_blank" rel="noopener" style="color:#fff"><b>☝️😮‍💨😌📍</b></a><br><a href="https://open.spotify.com/playlist/49t7oJ9h1LAsKPlDnMFT54" target="_blank" rel="noopener" style="color:#fff"><b>☝️🐶🥰😪</b></a><br><a href="https://open.spotify.com/playlist/7wMzdUOrNKxNqW1iisDFry" target="_blank" rel="noopener" style="color:#fff"><b>☣️</b></a><br><a href="https://open.spotify.com/playlist/4jC9qBtdkCz6XXi4xfQ9XL" target="_blank" rel="noopener" style="color:#fff"><b>. _ .</b></a><br><a href="https://open.spotify.com/playlist/6uxd3i8Iw5H2lll2NEO3Cx" target="_blank" rel="noopener" style="color:#fff"><b>.</b></a><br><a href="https://open.spotify.com/playlist/1Zy0DPjsb1hZhOWpYM42J8" target="_blank" rel="noopener" style="color:#fff"><b>Xvvx</b></a></p><p class="muted" id="zxc-pack-balance" style="margin:0 0 8px">Link your atom wallet to unlock.</p><button class="btn btn-gold" id="zxc-mol-unlock" style="cursor:pointer" onclick="packUnlock('zxc')">UNLOCK FOR 2 ATOMS</button><p class="muted" id="zxc-pack-msg" style="margin:8px 0 0"></p><p class="muted" style="margin:8px 0 0">Spend atoms from your linked atom wallet.</p></div><div id="zxc-pack-unlocked" style="display:none"><div style="display:grid;gap:12px"><div><p style="margin:0 0 6px"><b>zxc 1</b></p><iframe data-zxc="1" style="border-radius:12px" data-src="https://open.spotify.com/embed/playlist/46xAcFtUVU8vyorxOTjzaP?utm_source=generator&theme=0" width="100%" height="152" frameborder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe><a href="https://open.spotify.com/playlist/46xAcFtUVU8vyorxOTjzaP" target="_blank" rel="noopener" style="color:var(--green)">Open zxc 1 in Spotify ↗</a></div><div><p style="margin:0 0 6px"><b>zxc 2</b></p><iframe data-zxc="1" style="border-radius:12px" data-src="https://open.spotify.com/embed/playlist/5jaWPmE82CT2CVKlfhJcrI?utm_source=generator&theme=0" width="100%" height="152" frameborder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe><a href="https://open.spotify.com/playlist/5jaWPmE82CT2CVKlfhJcrI" target="_blank" rel="noopener" style="color:var(--green)">Open zxc 2 in Spotify ↗</a></div><div><p style="margin:0 0 6px"><b>zxc 3</b></p><iframe data-zxc="1" style="border-radius:12px" data-src="https://open.spotify.com/embed/playlist/1AFAnIvk6nJ8kkDgLAvbHv?utm_source=generator&theme=0" width="100%" height="152" frameborder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe><a href="https://open.spotify.com/playlist/1AFAnIvk6nJ8kkDgLAvbHv" target="_blank" rel="noopener" style="color:var(--green)">Open zxc 3 in Spotify ↗</a></div><div><p style="margin:0 0 6px"><b>ONEBLOOD</b></p><iframe data-zxc="1" style="border-radius:12px" data-src="https://open.spotify.com/embed/playlist/0jDomWPDrMOQly9wSbzJjC?utm_source=generator&theme=0" width="100%" height="152" frameborder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe><a href="https://open.spotify.com/playlist/0jDomWPDrMOQly9wSbzJjC" target="_blank" rel="noopener" style="color:var(--green)">Open ONEBLOOD in Spotify ↗</a></div><div><p style="margin:0 0 6px"><b>Stans</b></p><iframe data-zxc="1" style="border-radius:12px" data-src="https://open.spotify.com/embed/playlist/3JutZoHAWjnmbeZJoijO6m?utm_source=generator&theme=0" width="100%" height="152" frameborder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe><a href="https://open.spotify.com/playlist/3JutZoHAWjnmbeZJoijO6m" target="_blank" rel="noopener" style="color:var(--green)">Open Stans in Spotify ↗</a></div><div><p style="margin:0 0 6px"><b>._.</b></p><iframe data-zxc="1" style="border-radius:12px" data-src="https://open.spotify.com/embed/playlist/1BV53rd1YZVkuh6AnKzfPF?utm_source=generator&theme=0" width="100%" height="152" frameborder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe><a href="https://open.spotify.com/playlist/1BV53rd1YZVkuh6AnKzfPF" target="_blank" rel="noopener" style="color:var(--green)">Open ._. in Spotify ↗</a></div><div><p style="margin:0 0 6px"><b>.;';</b></p><iframe data-zxc="1" style="border-radius:12px" data-src="https://open.spotify.com/embed/playlist/3U6rFQEgNvtIzwLMxsHwfL?utm_source=generator&theme=0" width="100%" height="152" frameborder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe><a href="https://open.spotify.com/playlist/3U6rFQEgNvtIzwLMxsHwfL" target="_blank" rel="noopener" style="color:var(--green)">Open .;'; in Spotify ↗</a></div><div><p style="margin:0 0 6px"><b>☝️☺️🤦‍♂️</b></p><iframe data-zxc="1" style="border-radius:12px" data-src="https://open.spotify.com/embed/playlist/4xJGAz1nBXjjma44GOiN6y?utm_source=generator&theme=0" width="100%" height="152" frameborder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe><a href="https://open.spotify.com/playlist/4xJGAz1nBXjjma44GOiN6y" target="_blank" rel="noopener" style="color:var(--green)">Open ☝️☺️🤦‍♂️ in Spotify ↗</a></div><div><p style="margin:0 0 6px"><b>☝️😮‍💨😌📍</b></p><iframe data-zxc="1" style="border-radius:12px" data-src="https://open.spotify.com/embed/playlist/792R6upjvvzxJ7H7rYjqhj?utm_source=generator&theme=0" width="100%" height="152" frameborder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe><a href="https://open.spotify.com/playlist/792R6upjvvzxJ7H7rYjqhj" target="_blank" rel="noopener" style="color:var(--green)">Open ☝️😮‍💨😌📍 in Spotify ↗</a></div><div><p style="margin:0 0 6px"><b>☝️🐶🥰😪</b></p><iframe data-zxc="1" style="border-radius:12px" data-src="https://open.spotify.com/embed/playlist/49t7oJ9h1LAsKPlDnMFT54?utm_source=generator&theme=0" width="100%" height="152" frameborder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe><a href="https://open.spotify.com/playlist/49t7oJ9h1LAsKPlDnMFT54" target="_blank" rel="noopener" style="color:var(--green)">Open ☝️🐶🥰😪 in Spotify ↗</a></div><div><p style="margin:0 0 6px"><b>☣️</b></p><iframe data-zxc="1" style="border-radius:12px" data-src="https://open.spotify.com/embed/playlist/7wMzdUOrNKxNqW1iisDFry?utm_source=generator&theme=0" width="100%" height="152" frameborder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe><a href="https://open.spotify.com/playlist/7wMzdUOrNKxNqW1iisDFry" target="_blank" rel="noopener" style="color:var(--green)">Open ☣️ in Spotify ↗</a></div><div><p style="margin:0 0 6px"><b>. _ .</b></p><iframe data-zxc="1" style="border-radius:12px" data-src="https://open.spotify.com/embed/playlist/4jC9qBtdkCz6XXi4xfQ9XL?utm_source=generator&theme=0" width="100%" height="152" frameborder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe><a href="https://open.spotify.com/playlist/4jC9qBtdkCz6XXi4xfQ9XL" target="_blank" rel="noopener" style="color:var(--green)">Open . _ . in Spotify ↗</a></div><div><p style="margin:0 0 6px"><b>.</b></p><iframe data-zxc="1" style="border-radius:12px" data-src="https://open.spotify.com/embed/playlist/6uxd3i8Iw5H2lll2NEO3Cx?utm_source=generator&theme=0" width="100%" height="152" frameborder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe><a href="https://open.spotify.com/playlist/6uxd3i8Iw5H2lll2NEO3Cx" target="_blank" rel="noopener" style="color:var(--green)">Open . in Spotify ↗</a></div><div><p style="margin:0 0 6px"><b>Xvvx</b></p><iframe data-zxc="1" style="border-radius:12px" data-src="https://open.spotify.com/embed/playlist/1Zy0DPjsb1hZhOWpYM42J8?utm_source=generator&theme=0" width="100%" height="152" frameborder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe><a href="https://open.spotify.com/playlist/1Zy0DPjsb1hZhOWpYM42J8" target="_blank" rel="noopener" style="color:var(--green)">Open Xvvx in Spotify ↗</a></div></div></div></div></div><div id="hey-btns" class="hey-closed" style="margin-bottom:8px"><button class="hideout-btn" style="--accent:var(--purple);border-color:var(--purple)" onclick="toggleHideout('boo')"><span><span style="color:var(--purple)">●</span> BOO</span><small id="boo-label">[ CLICK TO UNLOCK ]</small></button><div id="boo" class="hideout-content"><iframe src="https://open.spotify.com/embed/playlist/5BgacLLQHyjNFxefQGNGp1" width="100%" height="336" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen"></iframe></div><button class="hideout-btn" style="border-color:var(--blue)" onclick="toggleHideout('wsp')"><span><span style="color:var(--blue)">●</span> WSP</span><small id="wsp-label">[ CLICK TO UNLOCK ]</small></button><div id="wsp" class="hideout-content"><iframe src="https://open.spotify.com/embed/playlist/4QFNU7G5WvntqUym59KUaq" width="100%" height="336" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen"></iframe></div><button class="hideout-btn" onclick="toggleHideout('ghost')"><span><span style="color:var(--red)">●</span> GHOST</span><small id="ghost-label">[ CLICK TO UNLOCK ]</small></button><div id="ghost" class="hideout-content"><iframe src="https://open.spotify.com/embed/playlist/5QeF5p5oDIXSilip8CN1Bx" width="100%" height="336" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen"></iframe></div><div class="card accent" id="hideout-sc-card" style="--accent:#ff5500;margin-bottom:16px"><button class="hideout-btn" id="sc-heading" style="--accent:#ff5500;border-color:#ff5500" onclick="toggleSc()"><span><span style="color:#ff5500">●</span> SOUNDCLOUD PLAYLISTS</span><small id="sc-state">[ OPEN ● ]</small></button><div id="sc-body" class="open"><p class="muted">Shawty's SoundCloud playlists — one pack, all three. Unlock with atoms.</p><div id="sc-pack-locked"><p style="margin:0 0 8px"><a href="https://soundcloud.com/candrick-james/sets/ilefa1f59cio" target="_blank" rel="noopener" style="color:#fff"><b>🙄</b></a><br><a href="https://soundcloud.com/candrick-james/sets/frfr" target="_blank" rel="noopener" style="color:#fff"><b>frfr</b></a><br><a href="https://soundcloud.com/candrick-james/sets/untitled-playlist" target="_blank" rel="noopener" style="color:#fff"><b>Untitled Playlist</b></a></p><p class="muted" id="sc-pack-balance" style="margin:0 0 8px">Link your atom wallet to unlock.</p><button class="btn btn-gold" id="sc-mol-unlock" style="cursor:pointer" onclick="packUnlock('sc')">UNLOCK FOR 2 ATOMS</button><p class="muted" id="sc-pack-msg" style="margin:8px 0 0"></p><p class="muted" style="margin:8px 0 0">Spend atoms from your linked atom wallet.</p></div><div id="sc-pack-unlocked" style="display:none"><div style="display:grid;gap:12px"><div><p style="margin:0 0 6px"><b>🙄</b></p><iframe style="border-radius:12px" data-src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/candrick-james/sets/ilefa1f59cio&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true" width="100%" height="152" frameborder="0" scrolling="no" loading="lazy"></iframe><a href="https://soundcloud.com/candrick-james/sets/ilefa1f59cio" target="_blank" rel="noopener" style="color:#ff5500">Open 🙄 on SoundCloud ↗</a></div><div><p style="margin:0 0 6px"><b>frfr</b></p><iframe style="border-radius:12px" data-src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/candrick-james/sets/frfr&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true" width="100%" height="152" frameborder="0" scrolling="no" loading="lazy"></iframe><a href="https://soundcloud.com/candrick-james/sets/frfr" target="_blank" rel="noopener" style="color:#ff5500">Open frfr on SoundCloud ↗</a></div><div><p style="margin:0 0 6px"><b>Untitled Playlist</b></p><iframe style="border-radius:12px" data-src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/candrick-james/sets/untitled-playlist&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true" width="100%" height="152" frameborder="0" scrolling="no" loading="lazy"></iframe><a href="https://soundcloud.com/candrick-james/sets/untitled-playlist" target="_blank" rel="noopener" style="color:#ff5500">Open Untitled Playlist on SoundCloud ↗</a></div></div></div></div></div></div><style>.hideout-btn{width:100%;background:#121212;border:1px solid #1c1c1c;border-radius:16px;padding:18px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;margin:10px 0;color:#fff;font-family:'Syne',sans-serif;font-weight:800;letter-spacing:4px}.hideout-btn small{color:var(--muted);font-size:10px}.hideout-content{display:none;margin:0 0 18px;border:1px solid #222;border-top:none;border-radius:0 0 16px 16px;overflow:hidden;background:#000}.hideout-content.open{display:block;animation:popIn .3s}#hey-body{display:none}#hey-body.open{display:block;animation:popIn .3s}#hey-btns.hey-closed{display:none}#sc-body{display:none}#sc-body.open{display:block;animation:popIn .3s}</style>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+
+<script>var PACK_BASE={zxc:2,sc:2};
+var PACK_STEP=2;
+function fmtAtoms(n){var v=Number(n);if(isNaN(v))v=0;return String(Math.floor(v));}
+var PACK_UNIT={zxc:'atoms',sc:'atoms'};
+var PACK_WIN_MS=86400000; 
+window.__ionPacks=window.__ionPacks||{uid:null,code:'',bal:null,packs:[],ready:false,err:'',db:null};
+function packStepKey(p){return 'sw_pack_step_'+p;}
+function packWinKey(p){return 'sw_pack_win_'+p;}
+function packUnlockKey(p){return 'sw_pack_unlocked_'+p;}
+function packStep(p){try{var v=parseInt(localStorage.getItem(packStepKey(p)),10);if(isNaN(v)||v<0)v=0;return v;}catch(e){return 0;}}
+function packSetStep(p,s){try{localStorage.setItem(packStepKey(p),String(s));}catch(e){}}
+function packWin(p){try{var v=parseInt(localStorage.getItem(packWinKey(p)),10);if(isNaN(v)||v<0)v=0;return v;}catch(e){return 0;}}
+function packSetWin(p,t){try{localStorage.setItem(packWinKey(p),String(t));}catch(e){}}
+function packUnitWord(n){return n===1?'atom':'atoms';}
+function packWindow(p){
+var c=packStep(p),w=packWin(p),now=Date.now();
+if(c>0&&(w<=0||now-w>=PACK_WIN_MS)){packSetStep(p,0);packSetWin(p,0);return 0;}
+return c;
+}
+function packPrice(p){return (PACK_BASE[p]||2)+PACK_STEP*packWindow(p);}
+function packUnit(p){return PACK_UNIT[p]||'ions';}
+function packIsUnlocked(p){
+try{if(localStorage.getItem(packUnlockKey(p))==='1')return true;}catch(e){}
+var ion=window.__ionPacks||{};
+return !!(ion.packs&&ion.packs.indexOf('pack-'+p)>=0);
+}
+function packShow(p){
+var price=packPrice(p);
+var unit=packUnit(p);
+var uw=packUnitWord(price);
+var pe=document.getElementById(p+'-pack-price');if(pe)pe.textContent=fmtAtoms(price)+' '+uw;
+var ion=window.__ionPacks||{};
+var be=document.getElementById(p+'-pack-balance');
+if(be){
+if(ion.uid&&typeof ion.bal==='number')be.textContent='Your balance: '+fmtAtoms(ion.bal)+' atoms';
+else if(ion.uid)be.textContent='Atom wallet linked — loading balance…';
+else be.textContent='Atoms live at the Tavern — open it from the ATOMS card.';
+}
+var btn=document.getElementById(p+'-mol-unlock');if(btn)btn.textContent='UNLOCK FOR '+fmtAtoms(price)+' '+uw.toUpperCase();
+var l=document.getElementById(p+'-pack-locked');var u=document.getElementById(p+'-pack-unlocked');
+if(packIsUnlocked(p)){
+if(l)l.style.display='none';
+if(u){u.style.display='';var fr=u.querySelectorAll('iframe');for(var i=0;i<fr.length;i++){var f=fr[i];if(f.dataset&&f.dataset.src&&!f.src)f.src=f.dataset.src;}}
+}
+}
+function packMsg(p,t){var m=document.getElementById(p+'-pack-msg');if(m)m.textContent=t;}
+function packUnlock(p){
+if(packIsUnlocked(p)){packShow(p);return;}
+var price=packPrice(p);
+var ion=window.__ionPacks||{};
+if(!ion.uid||!ion.code){packMsg(p,'Atoms live on arcadio now — open the Tavern from the ATOMS card.');packShow(p);return;}
+if(!ion.db){packMsg(p,'Atom wallet still loading — try again in a moment.');packShow(p);return;}
+if(typeof ion.bal!=='number'){packMsg(p,'Atom wallet still loading — try again in a moment.');packShow(p);return;}
+if(ion.bal<price){packMsg(p,'Not enough atoms — you need '+fmtAtoms(price)+', you have '+fmtAtoms(ion.bal)+'.');packShow(p);return;}
+var ref=ion.db.collection('ion_wallets').doc(ion.uid);
+var code=ion.code,uid=ion.uid,item='pack-'+p;
+return ion.db.runTransaction(function(tx){
+return tx.get(ref).then(function(doc){
+if(!doc.exists)throw new Error('no-wallet');
+var d=doc.data()||{};
+var bal=(typeof d.atoms==='number')?d.atoms:(typeof d.ions==='number'?d.ions:0);
+if(bal<price)throw new Error('insufficient');
+var owned=Array.isArray(d.owned)?d.owned.slice():[];
+if(owned.indexOf(item)<0)owned.push(item);
+var upd={owned:owned,code:code,uid:uid,ts:Date.now()};if(typeof d.atoms==='number')upd.atoms=bal-price;if(typeof d.ions==='number')upd.ions=bal-price;if(typeof d.atoms!=='number'&&typeof d.ions!=='number')upd.ions=bal-price;tx.update(ref,upd);
+return bal-price;
+});
+}).then(function(newBal){
+ion.bal=newBal;
+if(ion.packs.indexOf(item)<0)ion.packs.push(item);
+try{localStorage.setItem(packUnlockKey(p),'1');}catch(e){}
+var c=packWindow(p),w=packWin(p);
+if(w<=0)w=Date.now();
+packSetStep(p,c+1);packSetWin(p,w);
+packSaveState(p);
+packShow(p);
+packMsg(p,'Unlocked — enjoy the playlists. ('+fmtAtoms(price)+' '+packUnitWord(price)+' spent, '+fmtAtoms(newBal)+' left.)');
+if(typeof ionRenderLine==='function')ionRenderLine();
+}).catch(function(err){
+var m=(err&&err.message)?String(err.message):'';
+var cd=(err&&err.code)?String(err.code):'';
+if(m==='no-wallet'){packMsg(p,'Wallet not found — open the third site once, then link again.');}
+else if(m==='insufficient'){packMsg(p,'Not enough atoms — your balance changed. Check the third site.');}
+else if(cd==='permission-denied'||m.indexOf('permission')>=0){packMsg(p,'Atom wallet refused — open the third site once to refresh your wallet, then try again.');}
+else{packMsg(p,'Ion buy failed — try again.');}
+packShow(p);
+});
+}
+function packSaveState(p){
+try{
+if(typeof db==='undefined'||!db||!db.collection)return;
+db.collection('shop').doc(p+'-price').set({step:packStep(p),win:packWin(p)},{merge:true}).catch(function(){});
+}catch(e){}
+}
+function packLoadStep(p){
+try{
+if(typeof db==='undefined'||!db||!db.collection){packShow(p);return;}
+db.collection('shop').doc(p+'-price').get().then(function(d){
+var dd=(d&&d.exists&&d.data())?d.data():null;
+var s=(dd&&typeof dd.step==='number')?Math.floor(dd.step):-1;
+var w=(dd&&typeof dd.win==='number')?Math.floor(dd.win):0;
+if(!(s>=0))s=-1;
+if(!(w>0))w=0;
+if(w>0){
+var lw=packWin(p),lc=packStep(p);
+if(w>lw){packSetStep(p,s<0?0:s);packSetWin(p,w);}
+else if(w===lw&&s>lc){packSetStep(p,s);}
+}
+packShow(p);
+}).catch(function(){packShow(p);});
+}catch(e){packShow(p);}
+}
+function packInit(){packLoadStep('zxc');packLoadStep('sc');}
+try{packInit();}catch(e){}
+try{if(document&&document.addEventListener)document.addEventListener('DOMContentLoaded',packInit);}catch(e){}
+</script>
+
+
+
+
+<div style="height:44px"></div></div><div id="page-bloodnet" class="page"><style>#page-bloodnet .card{margin:10px 0;padding:18px 20px}#page-bloodnet .card h2{margin-bottom:10px}#page-bloodnet .socials-bar{display:flex;gap:8px;overflow-x:visible;flex-wrap:wrap;padding:2px}#page-bloodnet .socials-bar a{flex:0 0 auto;white-space:nowrap}#page-bloodnet .socials-bar a small{display:none}</style>
+<div class="card accent" style="--accent:var(--red)"><h2 style="color:var(--red)">● BLOODNET</h2><p class="muted">All socials, in one place.</p><div class="socials-bar" id="social-links-bloodnet"></div></div><div class="card accent" style="--accent:var(--gold);cursor:pointer" onclick="proj('gold',1)"><h2 style="color:var(--gold)">GoldResidence — SAMHEL</h2><p class="muted">Tap to open</p></div><div class="card accent" style="cursor:pointer" onclick="window.location='https://chasingcultures.org/'"><h2>Chasing Cultures</h2><p class="muted">Tap to open</p></div><div class="card accent" style="--accent:var(--green);cursor:pointer" onclick="proj('myorigami',1)"><h2 style="color:var(--green)">Myorigami — BORIS</h2><p class="muted">Tap to open</p></div><div class="modal" id="gold"><div class="modal-header"><span>GoldResidence — SAMHEL</span><span class="close">X</span></div><div class="modal-body"><a href="https://wa.me/639481541132" class="btn btn-gold">💬 WhatsApp — Samhel</a><h2 style="color:var(--gold)">GoldResidence — UNITS</h2><div class="grid2" id="units"></div><div class="center" style="margin-top:14px"><a class="btn btn-gold" id="wa-gold-main" target="_blank" rel="noopener">💬 WhatsApp — Samhel</a><a class="btn" id="gold-email">✉️ Email Samhel</a></div></div></div><div class="modal" id="myorigami"><div class="modal-header"><span>Myorigami — BORIS</span><span class="close">X</span></div><div class="modal-body"><a href="https://wa.me/15854482416?text=Boris%20Myorigami" class="btn btn-green">Contact BORIS</a><a class="btn" href="https://myorigami.com" target="_blank" rel="noopener">OPEN MYORIGAMI.COM →</a></div></div><div id="aq2"></div></div></main><script>function show(n){n=n=='projects'||n=='hideout'?'vault':(n=='socialdark'||n=='social'?'bloodnet':(n=='game'?'home':n));document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.nav button').forEach(b=>b.classList.remove('active'));document.getElementById('page-'+n).classList.add('active');var ab=document.getElementById('b-'+n);if(ab){ab.classList.add('active');ab.scrollIntoView({block:'nearest'});}var bb=document.getElementById('bloodnet-bubble');window._bubbleTab=n;if(bb&&!window._bubbleHidden)bb.style.display='flex';}
+(function(){var _showPage=show;window.show=function(n){_showPage(n);if((n==='game'||n==='home')&&!window._gameLoaded){window._gameLoaded=1;if(typeof pickGame==='function')pickGame('invader');}};if(document&&document.addEventListener)document.addEventListener('DOMContentLoaded',function(){if(!window._gameLoaded){window._gameLoaded=1;if(typeof pickGame==='function')pickGame('invader');}});})();(function(){var v=document.querySelector('.nav');if(!v)return;var d=0,x=0,s=0,m=0;v.onpointerdown=e=>{if(e.pointerType!='mouse')return;d=1;m=0;x=e.clientX;s=v.scrollLeft};v.onpointermove=e=>{if(!d||e.pointerType!='mouse')return;var w=e.clientX-x;if(Math.abs(w)>6&&v.scrollWidth>v.clientWidth)m=1;v.scrollLeft=s-w};v.onpointerup=()=>d=0;v.addEventListener('click',e=>{if(m){e.stopPropagation();m=0}},1)})();
+function toggleHideout(id){
+const el=document.getElementById(id);
+const label=document.getElementById(id+'-label');
+const isOpen=el.classList.contains('open');
+var bubble=document.getElementById('bubble-text');
+if(bubble&&!bubble.dataset.orig)bubble.dataset.orig=bubble.textContent;
+document.querySelectorAll('.hideout-content').forEach(c=>{c.classList.remove('open');var f=c.querySelector('iframe');if(f){if(!f.dataset.src)f.dataset.src=f.src;f.src='about:blank';}});
+document.querySelectorAll('[id$="-label"]').forEach(l=>l.textContent='[ CLICK TO UNLOCK ]');
+if(!isOpen){
+el.classList.add('open');
+var of=el.querySelector('iframe');if(of&&of.dataset.src)of.src=of.dataset.src;
+label.textContent='[ OPEN ● ]';
+if(bubble)bubble.textContent='▶ NOW PLAYING: '+id.toUpperCase();
+var _hs=document.getElementById('hideout-now-song');var _ht=document.getElementById('hideout-now-time');
+if(_hs&&!_hs.dataset.orig)_hs.dataset.orig=_hs.innerHTML;
+if(_ht&&!_ht.dataset.orig)_ht.dataset.orig=_ht.textContent;
+if(_hs)_hs.innerHTML='<b>'+id.toUpperCase()+'</b>';
+if(_ht)_ht.textContent='▶ Listening to '+id.toUpperCase()+' playlist';
+var _hh=document.querySelector('#hideout-now-card h2');if(_hh)_hh.textContent='NOW LISTENING';
+el.scrollIntoView({behavior:'smooth',block:'start'});
+} else {
+if(bubble&&bubble.dataset.orig)bubble.textContent=bubble.dataset.orig;
+var _hs2=document.getElementById('hideout-now-song');var _ht2=document.getElementById('hideout-now-time');
+if(_hs2&&_hs2.dataset.orig)_hs2.innerHTML=_hs2.dataset.orig;
+if(_ht2&&_ht2.dataset.orig)_ht2.textContent=_ht2.dataset.orig;
+var _hh2=document.querySelector('#hideout-now-card h2');if(_hh2)_hh2.textContent='WAS LISTENING';
+}
+}
+function toggleHey(){
+var body=document.getElementById('hey-body');
+var btns=document.getElementById('hey-btns');
+var state=document.getElementById('hey-state');
+var open=body&&body.classList.contains('open');
+if(body)body.classList.toggle('open',!open);
+if(btns)btns.classList.toggle('hey-closed',open);
+if(state)state.textContent=open?'[ CLICK TO UNLOCK ]':'[ OPEN ● ]';
+if(open){
+document.querySelectorAll('.hideout-content').forEach(c=>{c.classList.remove('open');var f=c.querySelector('iframe');if(f){if(!f.dataset.src)f.dataset.src=f.src;f.src='about:blank';}});
+document.querySelectorAll('[id$="-label"]').forEach(l=>l.textContent='[ CLICK TO UNLOCK ]');
+var bubble=document.getElementById('bubble-text');if(bubble&&bubble.dataset.orig)bubble.textContent=bubble.dataset.orig;
+var _hs=document.getElementById('hideout-now-song');var _ht=document.getElementById('hideout-now-time');
+if(_hs&&_hs.dataset.orig)_hs.innerHTML=_hs.dataset.orig;
+if(_ht&&_ht.dataset.orig)_ht.textContent=_ht.dataset.orig;
+var _hh=document.querySelector('#hideout-now-card h2');if(_hh)_hh.textContent='WAS LISTENING';
+} else {
+var h=document.getElementById('hey-heading');if(h)h.scrollIntoView({behavior:'smooth',block:'start'});
+}
+}
+function toggleSc(){
+var body=document.getElementById('sc-body');
+var state=document.getElementById('sc-state');
+var open=body&&body.classList.contains('open');
+if(body)body.classList.toggle('open',!open);
+if(state)state.textContent=open?'[ CLICK TO UNLOCK ]':'[ OPEN ● ]';
+if(open){
+var sc=document.getElementById('sc-body');
+if(sc)sc.querySelectorAll('iframe').forEach(f=>{if(!f.dataset.src)f.dataset.src=f.src;f.src='about:blank';});
+} else {
+var sc2=document.getElementById('sc-body');
+if(sc2)sc2.querySelectorAll('iframe').forEach(f=>{if(f.dataset.src)f.src=f.dataset.src;});
+var h2=document.getElementById('sc-heading');if(h2)h2.scrollIntoView({behavior:'smooth',block:'start'});
+}
+}
+const matrixCanvas=document.getElementById('matrix'),ctx=matrixCanvas.getContext('2d');let drops=[];function resize(){matrixCanvas.width=innerWidth;matrixCanvas.height=innerHeight;drops=[];for(let i=0;i<matrixCanvas.width/14;i++)drops[i]=Math.random()*-100}resize();addEventListener('resize',resize);(function draw(){ctx.fillStyle='rgba(5,5,5,0.08)';ctx.fillRect(0,0,matrixCanvas.width,matrixCanvas.height);ctx.fillStyle='#ff1a1a';ctx.font='14px monospace';for(let i=0;i<drops.length;i++){ctx.fillText("VANIX01"[Math.floor(Math.random()*7)],i*14,drops[i]*14);if(drops[i]*14>matrixCanvas.height&&Math.random()>0.975)drops[i]=0;drops[i]++}requestAnimationFrame(draw)})();
+let d=0;setInterval(()=>{d=(d+1)%4;let el=document.getElementById('conn');if(el)el.textContent='HOME'+'.'.repeat(d)},500);
+function vsLoad(){var m=$('vs');if(m){vsOpen();return;}var s=document.createElement('script');s.src='/vs-ui.js';s.onload=function(){vsOpen();};s.onerror=function(){alert('Video search is unavailable right now.');};document.body.appendChild(s);}
+</script>
+<script>const PHONE_PH = '639481541132';
+const BTC_ADDRESS = 'bc1qcns36naewg09d4hdyx2a9xr5aqxtt4phmt6uar';
+const ZELLE_URL = 'https://enroll.zellepay.com/qr-codes?data=eyJ0b2tlbiI6IkNhbmRyaWNramFtZXMxMTIyQGdtYWlsLmNvbSIsIm5hbWUiOiJjYW5kcmljayBkaW0iLCJhY3Rpb24iOiJQYXltZW50In0=';
+const PAYPAL_QR_URL = 'https://www.paypal.com/qrcodes/p2pqrc/AHND2B5PCE6L6';
+const QR_CODES = [
+{ label: '💵 CASH APP', data: 'https://cash.app/$CeeWraith/1', open: 'https://cash.app/$CeeWraith/1', openLabel: 'OPEN CASH APP' },
+{ label: '₿ BITCOIN',   data: 'bitcoin:' + BTC_ADDRESS, address: BTC_ADDRESS, open: 'bitcoin:' + BTC_ADDRESS, openLabel: 'OPEN BITCOIN WALLET' },
+{ label: '🅿️ PAYPAL',  data: PAYPAL_QR_URL, open: PAYPAL_QR_URL, openLabel: 'OPEN PAYPAL' },
+{ label: '💚 CHIME',   data: 'https://app.chime.com/link/qr?u=Candrick-Dim', img: '/chime-qr.png', open: 'https://app.chime.com/link/qr?u=Candrick-Dim', openLabel: 'OPEN CHIME' },
+{ label: '🏦 ZELLE',    data: ZELLE_URL,     open: ZELLE_URL,     openLabel: 'OPEN ZELLE QR' },
+];
+const SOCIALS = [
+['YOUTUBE',    'https://www.youtube.com/@sav2070', '', '@sav2070'],
+['SPOTIFY',    'https://open.spotify.com/user/f5fw0fr8k6qnmw0fgyt93ghqk', 'btn-outline', 'Savage Wraith'],
+['TIKTOK',     'https://www.tiktok.com/@kingofkingscjog', 'btn-outline', '@kingofkingscjog'],
+['INSTA',      'https://www.instagram.com/persistentbeat/', 'btn-outline', '@persistentbeat'],
+['FACEBOOK',   'https://www.facebook.com/OGKingsofKings', 'btn-outline', 'OGKingsofKings'],
+['DISCORD',    'https://discordapp.com/users/650311717594726431', 'btn-outline', 'Add me'],
+['SOUNDCLOUD', 'https://soundcloud.com/candrick-james', 'btn-outline', 'candrick-james'],
+['X / TWITTER','https://x.com/Shawtyseejay', 'btn-outline', '@Shawtyseejay'],
+['BLUESKY',    'https://bsky.app/profile/savagewraith-vanix.bsky.social', 'btn-bluesky', ''],
+['SUBSTACK',   'https://substack.com/@randomnamelol', 'btn-substack', ''],
+['LINKEDIN',   'https://www.linkedin.com/in/candrick-james-borja', 'btn-outline', ''],
+['REDDIT',     'https://www.reddit.com/user/Available-Society827/', 'btn-outline', ''],
+];
+const UNITS = [
+{ name: '1BR 25.42 — ₱26,241/mo x 36', note: 'Most Popular — Across NAIA T1', ask: 'GoldResidence 1BR 25.42 Available?', featured: true },
+{ name: 'Studio 18.5 — Airbnb King',   note: '₱18k/mo est.',                  ask: 'Studio Available?' },
+];
+const ENC_CODES = [
+'1010101010010101', '1100110011001010', '1010010101011100',
+'1110001010101010', '0101010101010101',
+];
+const firebaseConfig = {
+apiKey: "AIzaSyB1ERnGB2hAGclij5GN8H184U6jN_tVrKA",
+authDomain: "swvp-721a0.firebaseapp.com",
+projectId: "swvp-721a0",
+messagingSenderId: "1068856275039",
+appId: "1:1068856275039:web:77f79ebc6aefedb6252bea",
+measurementId: "G-ECZN9Y71TT"
+};
+const $ = id => document.getElementById(id);
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c =>
+({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const safeUrl = u => /^https?:\/\//i.test(u || '') ? u : '';
+const waLink = (phone, text = '') =>
+`https://wa.me/${phone}${text ? '?text=' + encodeURIComponent(text) : ''}`;
+const qrImg = data =>
+`https://api.qrserver.com/v1/create-qr-code/?size=400x400&data=${encodeURIComponent(data)}`;
+/* ===== static sections ===== */
+$('qr-grid').innerHTML = QR_CODES.map(q => `
+  <div class="qr" style="cursor:pointer" onclick="var _u='${q.open || q.data}';if(_u.indexOf('bitcoin:')===0){location.href=_u;}else{window.open(_u,'_blank');}">
+    <p>${q.label}</p>
+    <img src="${q.img || qrImg(q.data)}" alt="${q.label} QR code" loading="lazy">
+    ${q.address ? `<p class="addr">${q.address}</p>` : ''}
+  </div>`).join('');
+var _aq=`<div class="card accent"><h2>PUT ME IN YOUR POCKET</h2><div class="center"><img src="${qrImg('https://swpvp-dsu8.vercel.app/')}" alt="app qr" style="width:220px;background:#fff;padding:8px;border-radius:12px;cursor:pointer" onclick="getTheApp()"></div><p class="muted center" style="margin-top:10px">Scan or tap me to put me inside your pocket</p></div>`;var _a1=$('aq1');if(_a1)_a1.innerHTML=_aq;var _a2=$('aq2');if(_a2)_a2.innerHTML=_aq;
+var _socialHtml = SOCIALS.map(([label, href, cls = '', handle = '']) =>
+`<a class="btn ${cls}" href="${href}" target="_blank" rel="noopener">${label}${handle ? `<small style="display:block;font-size:9px;font-weight:400;opacity:.65;margin-top:2px">${esc(handle)}</small>` : ''}</a>`).join('');
+var _sl1 = $('social-links'); if(_sl1) _sl1.innerHTML = _socialHtml;
+var _sl2 = $('social-links-hesoyam'); if(_sl2) _sl2.innerHTML = _socialHtml;
+var _sl3 = $('social-links-fun'); if(_sl3) _sl3.innerHTML = _socialHtml;
+var _sl4 = $('social-links-bloodnet'); if(_sl4) _sl4.innerHTML = _socialHtml;
+$('wa-gold-main').href = waLink(PHONE_PH, 'GoldResidence - I want computation please');
+$('gold-email').href   = 'mailto:smdcsamhel@gmail.com?subject=' + encodeURIComponent('GoldResidence');
+$('units').innerHTML = UNITS.map(u => `
+  <div class="unit ${u.featured ? 'featured' : ''}">
+    <b>${u.name}</b>
+    <p class="muted">${u.note}</p>
+    <a class="btn ${u.featured ? 'btn-gold' : ''}" target="_blank" rel="noopener"
+       href="${waLink(PHONE_PH, u.ask)}">WhatsApp</a>
+  </div>`).join('');
+/* rotating binary title above the feed */
+let encIdx = 0;
+setInterval(() => { const el = $('enc-title'); if (el) el.textContent = ENC_CODES[encIdx++ % ENC_CODES.length] + ' // '; }, 800);
+const modal = $('post-modal');
+if (modal) { const _op = $('open-post'); const _cp = $('close-post'); if (_op) _op.onclick = () => modal.classList.add('show'); if (_cp) _cp.onclick = () => modal.classList.remove('show'); modal.addEventListener('click', e => { if (e.target === modal || (e.target.closest && e.target.closest('#close-post'))) modal.classList.remove('show'); }); }
+document.addEventListener('keydown', e => { if (e.key === 'Escape') { if (modal) modal.classList.remove('show'); _pj.forEach(function(i){proj(i,0);}); } });
+var _pj=['gold','myorigami','mv-tubi','mv-pluto','mv-yt','mv-archive','mv-plex','mv-crunchy','mv-tubianime','mv-retro','mv-plutoanime','mv-justwatch'];
+function proj(i,s){var m=$(i);if(m)m.classList[s?'add':'remove']('show');}
+_pj.forEach(function(i){var m=$(i);if(!m)return;m.addEventListener('click',function(e){if(e.target===m||(e.target.classList&&e.target.classList.contains('close')))proj(i,0);});});
+</script>
+<script>var ION_CODE_B64='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_';
+function ionCodeHash(s){var h=5381;for(var i=0;i<s.length;i++){h=(((h<<5)+h)+s.charCodeAt(i))>>>0;}var hex=h.toString(16);while(hex.length<8)hex='0'+hex;return hex;}
+function ionCodeUtf8(s){var out=[];for(var i=0;i<s.length;i++){var c=s.charCodeAt(i);if(c<128)out.push(c);else if(c<2048)out.push(192|(c>>6),128|(c&63));else out.push(224|(c>>12),128|((c>>6)&63),128|(c&63));}return out;}
+function ionCodeB64d(s){var vals={},i;for(i=0;i<ION_CODE_B64.length;i++)vals[ION_CODE_B64.charAt(i)]=i;var out=[];var acc=0,nbits=0;for(i=0;i<s.length;i++){var v=vals[s.charAt(i)];if(v===undefined)return null;acc=(acc<<6)|v;nbits+=6;if(nbits>=8){nbits-=8;out.push((acc>>nbits)&255);}}return out;}
+function ionCodeFromUtf8(bytes){var out='',i=0;while(i<bytes.length){var b=bytes[i++];if(b<128)out+=String.fromCharCode(b);else if(b>=192&&b<224&&i<bytes.length)out+=String.fromCharCode(((b&31)<<6)|(bytes[i++]&63));else if(b>=224&&b<240&&i+1<bytes.length){out+=String.fromCharCode(((b&15)<<12)|((bytes[i]&63)<<6)|(bytes[i+1]&63));i+=2;}else out+='?';}return out;}
+function ionUidFromCode(code){
+if(!code)return null;
+var c=String(code).trim().replace(/\s+/g,'');
+var parts=c.split('-');
+if(parts.length!==3||(parts[0]!=='ATOM1'&&parts[0]!=='ION1'))return null;
+if(ionCodeHash(parts[1])!==parts[2].toLowerCase())return null;
+var bytes=ionCodeB64d(parts[1]);
+if(!bytes)return null;
+var uid=ionCodeFromUtf8(bytes);
+if(!uid||/[^A-Za-z0-9_-]/.test(uid))return null;
+return uid;
+}
+var db=null;
+function ionWalletStatus(t){var el=document.getElementById('atom-wallet-status');if(el)el.textContent=t;}
+function ionWalletBalance(t){var el=document.getElementById('atom-wallet-balance');if(el)el.textContent=t;}
+function ionWalletRefresh(){
+try{if(typeof packShow==='function'){packShow('zxc');packShow('sc');}}catch(e){}
+try{if(typeof window.updateMolCount==='function')window.updateMolCount();}catch(e){}
+try{var c=document.getElementById('ion-count');var ion=window.__ionPacks||{};if(c){if(ion.uid&&typeof ion.bal==='number'){c.textContent=' · '+fmtAtoms(ion.bal);c.style.display='';}else{c.textContent='';c.style.display='none';}}}catch(e){}
+}
+function ionWalletLink(code,quiet){
+var ion=window.__ionPacks||{};
+var c=String(code||'').trim();
+if(!c){if(!quiet)ionWalletStatus('Paste your ATOM1- code from the Tavern first.');return Promise.resolve(false);}
+var uid=ionUidFromCode(c);
+if(!uid){if(!quiet)ionWalletStatus('That code doesn\'t look right — copy it from the Tavern\'s ATOM WALLET card.');return Promise.resolve(false);}
+if(!db){if(!quiet)ionWalletStatus('Atom wallet still loading — try again in a moment.');return Promise.resolve(false);}
+ion.uid=uid;ion.code=c;
+if(!quiet)ionWalletStatus('Atom wallet linked — loading balance…');
+return db.collection('ion_wallets').doc(uid).get().then(function(doc){
+if(!doc||!doc.exists){ion.uid=null;ion.code='';ion.bal=null;ion.packs=[];ion.ready=false;if(!quiet)ionWalletStatus('Wallet not found — open the Tavern once, then link again.');ionWalletRefresh();return false;}
+var d=doc.data()||{};
+var bal=(typeof d.atoms==='number')?d.atoms:(typeof d.ions==='number'?d.ions:0);
+ion.bal=bal;
+ion.packs=Array.isArray(d.owned)?d.owned.slice():[];
+ion.ready=true;ion.err='';
+try{localStorage.setItem('sw_atom_wallet_code',c);}catch(e){}
+ionWalletStatus('Linked — your atoms are connected.');
+ionWalletBalance('Your balance: '+fmtAtoms(bal)+' atoms');
+var inp=document.getElementById('atom-wallet-code');if(inp&&!inp.value)inp.value=c;
+ionWalletRefresh();
+return true;
+}).catch(function(err){
+var m=(err&&err.code)?String(err.code):'';
+if(m.indexOf('permission-denied')>=0){ionWalletStatus('Atom wallet refused — open the Tavern once to refresh your wallet, then try again.');}
+else{ionWalletStatus('Couldn\'t reach the wallet — check your connection and try again.');}
+ionWalletRefresh();
+return false;
+});
+}
+function linkAtomWallet(){
+var inp=document.getElementById('atom-wallet-code');
+var code=inp?inp.value:'';
+ionWalletLink(code,false);
+}
+function unlinkAtomWallet(){
+var ion=window.__ionPacks||{};
+ion.uid=null;ion.code='';ion.bal=null;ion.packs=[];ion.ready=false;
+try{localStorage.removeItem('sw_atom_wallet_code');}catch(e){}
+var inp=document.getElementById('atom-wallet-code');if(inp)inp.value='';
+ionWalletStatus('Unlinked — paste your ATOM1- code from the Tavern to link again.');
+ionWalletBalance('');
+ionWalletRefresh();
+}
+(function ionWalletInit(){
+if(typeof firebase==='undefined'){ionWalletStatus('Atom wallet couldn\'t load (Firebase didn\'t load) — reload the page.');return;}
+try{if(firebase.apps&&!firebase.apps.length)firebase.initializeApp(firebaseConfig);}catch(e){}
+try{db=firebase.firestore();}catch(e){db=null;}
+window.__ionPacks=window.__ionPacks||{uid:null,code:'',bal:null,packs:[],ready:false,err:'',db:null};
+window.__ionPacks.db=db;
+if(!db){ionWalletStatus('Atom wallet couldn\'t load — reload the page.');return;}
+try{if(firebase.auth&&firebase.auth().signInAnonymously){firebase.auth().signInAnonymously().catch(function(){});}}catch(e){}
+var saved='';
+try{saved=localStorage.getItem('sw_atom_wallet_code')||'';}catch(e){}
+if(saved){ionWalletLink(saved,true);}
+else{ionWalletStatus('Not linked — get your code from the Tavern (arcadio), the ATOM WALLET card there.');}
+})();
+</script>
+<script>(function(){
+var el = document.getElementById('binary-status');
+if(!el) return;
+var msgs = [
+'Connecting to Social...',
+'Connecting... // FLOATING GREEN SIGNAL',
+'Decrypting galaxy...',
+'Scanning... // GLITCH DETECTED',
+'PersistentBeat -> Bloodnet...',
+'CONTROLS GALAXY: [ACTIVE]'
+];
+var i = 0, n = 0;
+var iv = setInterval(function(){
+n++;
+if(n >= 16){
+clearInterval(iv);
+el.textContent = '✓ DECRYPTED — AETH^ERIS: GALAXY UNLOCKED';
+el.style.color = '#00ff88';
+el.style.textShadow = '0 0 10px #00ff88';
+return;
+}
+i = (i+1) % msgs.length;
+el.textContent = msgs[i];
+},700);
+})();
+</script>
+<script>(function(){
+var el = document.getElementById('ion-status');
+if(!el) return;
+var msgs = [
+'Connecting to ATOMS...',
+'Connecting... // MULTIPLAYER SIGNAL',
+'Decrypting multiplayer...',
+'Scanning... // MULTIPLAYER FOUND',
+'PersistentBeat -> ATOMS...',
+'PLAYERS ONLINE: [ACTIVE]'
+];
+var i = 0, n = 0;
+var iv = setInterval(function(){
+n++;
+if(n >= 16){
+clearInterval(iv);
+el.textContent = '✓ DECRYPTED — ATOMS: MULTIPLAYER UNLOCKED';
+el.style.color = '#00ff88';
+el.style.textShadow = '0 0 10px #00ff88';
+return;
+}
+i = (i+1) % msgs.length;
+el.textContent = msgs[i];
+},700);
+})();
+</script>
+
+<div id="bloodnet-bubble" style="position:fixed;bottom:12px;right:12px;z-index:998;background:#121212;border:1px solid #333;border-radius:999px;padding:7px 10px;display:flex;gap:5px;align-items:center;cursor:pointer;font-size:11px;box-shadow:0 4px 20px rgba(0,0,0,.5)"><span style="color:var(--red)">●</span><span class="enc-title">101010</span><span id="bloodnet-bubble-label">GET THE APP</span></div><button type="button" id="sav-chat-fab" aria-label="Chat with SAV BOT" title="Drag to move • Tap to chat">💬 SAV BOT</button><div id="sav-chat" role="dialog" aria-label="Chat with SAV BOT"><div id="sav-chat-head"><span>💬 SAV BOT</span><button type="button" onclick="savChatToggle()" aria-label="Close chat">✕</button></div><div id="sav-chat-log"></div><form id="sav-chat-form" onsubmit="savChatSend();return false"><input id="sav-chat-in" type="text" placeholder="Message SAV BOT..." maxlength="2000" autocomplete="off"><button type="submit">SEND</button></form></div>
+<script>function savChatToggle(){var p=document.getElementById('sav-chat');if(!p)return;p.classList.toggle('open');if(p.classList.contains('open')){var log=document.getElementById('sav-chat-log');if(log&&!log.children.length){savChatAdd('bot','Hey - I am SAV BOT. Ask me about the site, the games, or the music.');}var i=document.getElementById('sav-chat-in');if(i)i.focus();}}
+function savChatAdd(who,text){var log=document.getElementById('sav-chat-log');if(!log)return null;var d=document.createElement('div');d.className='sav-msg '+who;d.textContent=text;log.appendChild(d);log.scrollTop=log.scrollHeight;return d;}
+function savChatSend(){var inp=document.getElementById('sav-chat-in');if(!inp)return;var v=inp.value.trim();if(!v)return;inp.value='';savChatAdd('you',v);var wait=savChatAdd('bot','...');fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:v})}).then(function(r){return r.json();}).then(function(d){if(wait)wait.textContent=(d&&(d.reply||d.error))||'No reply.';var log=document.getElementById('sav-chat-log');if(log)log.scrollTop=log.scrollHeight;}).catch(function(){if(wait)wait.textContent='Could not reach SAV BOT. Try again.';});}
+</script>
+<script>(function(){
+var KEY='sw_savchat_fab_pos',TAP=8,MARGIN=8;
+var fab=document.getElementById('sav-chat-fab');
+if(!fab)return;
+function clamp(x,y){var w=fab.offsetWidth||120,h=fab.offsetHeight||48;var mx=Math.max(MARGIN,window.innerWidth-w-MARGIN),my=Math.max(MARGIN,window.innerHeight-h-MARGIN);return{x:Math.min(Math.max(x,MARGIN),mx),y:Math.min(Math.max(y,MARGIN),my)};}
+function place(x,y){var p=clamp(x,y);fab.style.left=p.x+'px';fab.style.top=p.y+'px';fab.style.bottom='auto';return p;}
+try{var raw=localStorage.getItem(KEY);if(raw){var s=JSON.parse(raw);if(s&&typeof s.x==='number'&&typeof s.y==='number')place(s.x,s.y);}}catch(e){}
+window.addEventListener('resize',function(){var r=fab.getBoundingClientRect();place(r.left,r.top);});
+var sx=0,sy=0,ox=0,oy=0,moved=0,dragging=false,pid=null;
+fab.addEventListener('pointerdown',function(e){if(e.button!==undefined&&e.button!==0)return;var r=fab.getBoundingClientRect();sx=e.clientX;sy=e.clientY;ox=r.left;oy=r.top;moved=0;dragging=false;pid=e.pointerId;try{fab.setPointerCapture(e.pointerId);}catch(err){}});
+fab.addEventListener('pointermove',function(e){if(pid===null||e.pointerId!==pid)return;var dx=e.clientX-sx,dy=e.clientY-sy;moved=Math.max(moved,Math.abs(dx),Math.abs(dy));if(moved>TAP){dragging=true;fab.classList.add('dragging');}if(dragging)place(ox+dx,oy+dy);});
+function end(e){if(pid===null||(e&&e.pointerId!==pid))return;pid=null;fab.classList.remove('dragging');if(dragging){var r=fab.getBoundingClientRect();var p=place(r.left,r.top);try{localStorage.setItem(KEY,JSON.stringify({x:Math.round(p.x),y:Math.round(p.y)}));}catch(err){}dragging=false;}}
+fab.addEventListener('pointerup',end);
+fab.addEventListener('pointercancel',end);
+fab.addEventListener('click',function(e){if(moved>TAP){e.preventDefault();e.stopPropagation();return;}savChatToggle();});
+})();
+(function(){
+var KEY='sw_savchat_panel_pos',TAP=8,MARGIN=8;
+var panel=document.getElementById('sav-chat');
+var head=document.getElementById('sav-chat-head');
+if(!panel||!head)return;
+function clamp(x,y){var w=panel.offsetWidth||320,h=panel.offsetHeight||380;var mx=Math.max(MARGIN,window.innerWidth-w-MARGIN),my=Math.max(MARGIN,window.innerHeight-h-MARGIN);return{x:Math.min(Math.max(x,MARGIN),mx),y:Math.min(Math.max(y,MARGIN),my)};}
+function place(x,y){var p=clamp(x,y);panel.style.left=p.x+'px';panel.style.top=p.y+'px';panel.style.bottom='auto';return p;}
+try{var raw=localStorage.getItem(KEY);if(raw){var s=JSON.parse(raw);if(s&&typeof s.x==='number'&&typeof s.y==='number')place(s.x,s.y);}}catch(e){}
+window.addEventListener('resize',function(){if(!panel.classList.contains('open'))return;var r=panel.getBoundingClientRect();place(r.left,r.top);});
+var sx=0,sy=0,ox=0,oy=0,moved=0,dragging=false,pid=null;
+head.addEventListener('pointerdown',function(e){if(e.button!==undefined&&e.button!==0)return;if(e.target&&e.target.closest&&e.target.closest('button'))return;var r=panel.getBoundingClientRect();sx=e.clientX;sy=e.clientY;ox=r.left;oy=r.top;moved=0;dragging=false;pid=e.pointerId;try{head.setPointerCapture(e.pointerId);}catch(err){}});
+head.addEventListener('pointermove',function(e){if(pid===null||e.pointerId!==pid)return;var dx=e.clientX-sx,dy=e.clientY-sy;moved=Math.max(moved,Math.abs(dx),Math.abs(dy));if(moved>TAP){dragging=true;panel.classList.add('dragging');}if(dragging)place(ox+dx,oy+dy);});
+function end(e){if(pid===null||(e&&e.pointerId!==pid))return;pid=null;panel.classList.remove('dragging');if(dragging){var r=panel.getBoundingClientRect();var p=place(r.left,r.top);try{localStorage.setItem(KEY,JSON.stringify({x:Math.round(p.x),y:Math.round(p.y)}));}catch(err){}dragging=false;}}
+head.addEventListener('pointerup',end);
+head.addEventListener('pointercancel',end);
+})();
+</script>
+<script>(function(){
+var last=0;
+function fmt(ms){var s=Math.floor(ms/1000);return Math.floor(s/60)+':'+('0'+(s%60)).slice(-2);}
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function setPair(songId,timeId,d){
+var sEl=document.getElementById(songId),tEl=document.getElementById(timeId);
+if(!sEl||!tEl)return;
+sEl.innerHTML='<b>'+esc(d.name)+'</b> — '+esc(d.artist);
+tEl.textContent=(d.playing?'▶ Playing ':'⏸ Paused at ')+fmt(d.progress_ms)+' / '+fmt(d.duration_ms);
+}
+function refresh(){
+var now=Date.now(); if(now-last<30000)return; last=now;
+var ctl=null;try{ctl=new AbortController();}catch(e){}
+var to=null;if(ctl){to=setTimeout(function(){try{ctl.abort();}catch(e){}},8000);}
+fetch('/api/now-playing',ctl?{signal:ctl.signal}:undefined).then(function(r){if(to)clearTimeout(to);return r.json();}).then(function(d){
+if(!d||!d.name)return;
+setPair('splash-now-song','splash-now-time',d);
+if(!document.querySelector('.hideout-content.open'))setPair('hideout-now-song','hideout-now-time',d);
+setPair('fun-now-song','fun-now-time',d);
+}).catch(function(){if(to)clearTimeout(to);});
+}
+refresh();
+document.addEventListener('click',refresh);
+})();
+</script>
+<script>(function(){var d=null;window.addEventListener('beforeinstallprompt',function(e){e.preventDefault();d=e;});
+function toast(m){var t=document.getElementById('install-toast');if(!t){t=document.createElement('div');t.id='install-toast';t.style.cssText='position:fixed;left:50%;bottom:84px;transform:translateX(-50%);z-index:9999;background:#111;color:#fff;border:1px solid #0f0;border-radius:12px;padding:14px 16px;max-width:88vw;font-size:14px;line-height:1.5;text-align:center;box-shadow:0 4px 24px rgba(0,0,0,.6)';t.addEventListener('click',function(){t.style.display='none';});document.body.appendChild(t);}t.innerHTML=m+'<div style="margin-top:8px;font-size:12px;color:#888">tap this box to close</div>';t.style.display='block';}
+function inst(){return(window.matchMedia&&matchMedia('(display-mode: standalone)').matches)||navigator.standalone;}if(inst()){var _aq2=document.getElementById('aq2');if(_aq2)_aq2.style.display='none';}
+var b=document.getElementById('bloodnet-bubble');
+function getApp(){if(inst()){toast('You are already in the app.');return;}if(d){try{d.prompt();d.userChoice.then(function(){d=null;});}catch(e){}return;}if(/iphone|ipad|ipod/i.test(navigator.userAgent)&&!window.MSStream){toast('To get the app:<br>tap <b>Share</b>, then <b>Add to Home Screen</b>.');return;}toast('To get the app:<br>open your browser menu, then <b>Add to Home Screen</b> / <b>Install app</b>.');}window.getTheApp=getApp;
+if(inst()){if(b)b.style.display='none';window._bubbleHidden=true;}
+else if(b)b.addEventListener('click',getApp);
+if('serviceWorker' in navigator){var _swReloaded=false;var _hadCtl=!!navigator.serviceWorker.controller;function _swDoReload(){if(_swReloaded)return;_swReloaded=true;try{location.reload();}catch(e){}}navigator.serviceWorker.addEventListener('controllerchange',function(){if(_hadCtl){_swDoReload();}});window.addEventListener('load',function(){navigator.serviceWorker.register('/sw.js').then(function(reg){var _lastUpd=0;function _swUpdate(){var n=Date.now();if(n-_lastUpd<60000)return;_lastUpd=n;try{reg.update();}catch(e){}}reg.addEventListener('updatefound',function(){var nw=reg.installing;if(nw){nw.addEventListener('statechange',function(){if(nw.state==='installed'&&navigator.serviceWorker.controller){_swDoReload();}});}});if(reg.waiting&&navigator.serviceWorker.controller){_swDoReload();}document.addEventListener('visibilitychange',function(){if(!document.hidden){_swUpdate();}});window.addEventListener('focus',function(){_swUpdate();});}).catch(function(){});});}})();
+</script>
+<script>(function(){var tg,X,Y,h=0,tm;
+function go(){if(!h)return;var t=tg;if(!/^(BODY|MAIN|HEADER)$/.test(t.tagName)&&(t.id||'').indexOf('page-'))return;var m=document.getElementById('matrix');if(!m)return;var x=m.getContext('2d');m.style.opacity=.85;var G='01アカサ',i,a,d,r;for(i=0;i<14;i++){a=Math.random()*6.28;d=20+Math.random()*70;x.fillStyle='#D4AF37';x.fillText(G[Math.random()*5|0],X+Math.cos(a)*d,Y+Math.sin(a)*d)}x.strokeStyle='#D4AF37';for(r=24;r<130;r+=34){x.globalAlpha=1-r/160;x.beginPath();x.arc(X,Y,r,0,6.28);x.stroke()}x.globalAlpha=1;setTimeout(()=>m.style.opacity=.22,900)}
+document.onpointerdown=function(e){if(e.button)return;h=1;X=e.clientX;Y=e.clientY;tg=e.target;clearTimeout(tm);tm=setTimeout(go,250)};
+document.onpointermove=function(e){if(h&&(Math.abs(e.clientX-X)>10||Math.abs(e.clientY-Y)>10)){h=0;clearTimeout(tm)}};
+document.onpointerup=document.onpointercancel=function(){h=0;clearTimeout(tm)};})();
+</script>
+<div id="bright-dim" aria-hidden="true"></div>
+<script>(function(){
+var LEVELS={HIGH:0,MED:0.2,LOW:0.45};
+var ORDER=['HIGH','MED','LOW'];
+var LABEL={HIGH:'HIGH',MED:'MED',LOW:'LOW'};
+var EYEOP={HIGH:1,MED:.7,LOW:.45};
+var KEY='site_brightness';
+var cur='HIGH',manual=false;
+function apply(l){
+cur=l;
+var d=document.getElementById('bright-dim');
+if(d)d.style.opacity=LEVELS[l];
+var b=document.getElementById('bright-btn');
+if(b){
+b.setAttribute('data-level',l);
+var lv=b.querySelector('.bright-lvl');
+if(lv)lv.textContent=LABEL[l];
+var ey=b.querySelector('.bright-eye');
+if(ey)ey.style.opacity=EYEOP[l];
+}
+}
+window.cycleBrightness=function(){
+manual=true;
+var i=ORDER.indexOf(cur);
+var next=ORDER[(i+1)%ORDER.length];
+apply(next);
+try{localStorage.setItem(KEY,next);}catch(e){}
+};
+function autoFromLux(lux){
+if(lux>=200)return 'HIGH';
+if(lux>=20)return 'MED';
+return 'LOW';
+}
+try{
+if('AmbientLightSensor' in window){
+var s=new AmbientLightSensor();
+s.addEventListener('reading',function(){
+if(!manual&&typeof s.illuminance==='number')apply(autoFromLux(s.illuminance));
+});
+s.addEventListener('error',function(){});
+s.start();
+}
+}catch(e){}
+var saved=null;
+try{saved=localStorage.getItem(KEY);}catch(e){}
+if(saved==='HIGH'||saved==='MED'||saved==='LOW'){manual=true;apply(saved);}
+else apply('HIGH');
+})();
+</script>
+
+<iframe id="aetherix-preload" title="Aetherix preload" src="about:blank" data-src="https://wraith-ecosystem-control.vercel.app" aria-hidden="true" tabindex="-1" style="display:none;width:0;height:0;border:0;position:absolute;left:-9999px;top:0"></iframe>
+<script>(function(){var f=document.getElementById('aetherix-preload');if(!f)return;var done=false;function closeSplash(){if(done)return;done=true;try{if(typeof window.__splashHide==='function'){window.__splashHide();}else{var o=document.getElementById('loading-page');if(o){o.style.transition='opacity .6s';o.style.opacity='0';setTimeout(function(){o.style.display='none';},700);}}}catch(e){}}function go(){try{var u=f.getAttribute('data-src');if(!u)return;if(f.getAttribute('src')!==u){f.addEventListener('load',closeSplash);f.addEventListener('error',closeSplash);f.setAttribute('src',u);}setTimeout(closeSplash,8000);}catch(e){closeSplash();}}go();})();
+</script>
+<script>(function(){var ION_URL='https://system-dsu8.vercel.app';var navDone=false;function goIon(){if(navDone)return;navDone=true;window.location.href=ION_URL;}function wire(el){if(!el)return;var lastTap=0;el.addEventListener('dblclick',function(e){e.preventDefault();goIon();});el.addEventListener('click',function(){var now=Date.now();if(now-lastTap<300){goIon();}lastTap=now;});}
+wire(document.getElementById('logo-name'));
+wire(document.querySelector('.ms-pav'));
+wire(document.querySelector('.ms-pinfo > b'));
+wire(document.querySelector('.ms-lvl'));
+wire(document.querySelector('.core'));
+wire(document.getElementById('fun-now-bar'));
+wire(document.querySelector('div[style="height:44px"]'));
+})();
+</script>
+</body></html>
